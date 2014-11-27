@@ -1,0 +1,31 @@
+{
+  "name": "hapi-react-views",
+  "version": "1.0.0",
+  "description": "A hapi view engine for React components.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jedireza/hapi-react-views"
+  },
+  "keywords": [
+    "hapi",
+    "react",
+    "views"
+  ],
+  "author": "Reza Akhavan <jedireza@gmail.com> (http://reza.akhavan.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jedireza/hapi-react-views/issues"
+  },
+  "homepage": "https://github.com/jedireza/hapi-react-views",
+  "dependencies": {
+    "hoek": "^2.10.0",
+    "node-jsx": "^0.12.4"
+  },
+  "peerDependencies": {
+    "react": "^0.12.1"
+  }
+}
