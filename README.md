@@ -2,6 +2,10 @@
 
 A hapi view engine for React components.
 
+[![Dependency Status](https://david-dm.org/jedireza/hapi-react-views.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views)
+[![devDependency Status](https://david-dm.org/jedireza/hapi-react-views/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views#info=devDependencies)
+[![Build Status](https://travis-ci.org/jedireza/hapi-react-views.svg?branch=master)](https://travis-ci.org/jedireza/hapi-react-views)
+
 By default, we render static markup. We can also choose to use
 `React.renderToString`, preserving the `data-react-id` attributes so
 re-mounting client side is possible.
