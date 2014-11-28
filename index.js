@@ -7,7 +7,8 @@ require('node-jsx').install();
 var EXT_REGEX = new RegExp('\\.jsx$');
 var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
-    renderMethod: 'renderToStaticMarkup'
+    renderMethod: 'renderToStaticMarkup',
+    removeCache: 'production' !== process.env.NODE_ENV
 };
 
 
@@ -19,28 +20,23 @@ var compile = function compile(template, compileOpts) {
 
     return function render(context, renderOpts) {
 
-        var output = renderOpts.doctype || compileOpts.doctype;
-        var renderMethod = renderOpts.renderMethod || compileOpts.renderMethod;
-
-        try {
-            Component = Component || require(filepath);
-            Element = Element || React.createFactory(Component);
-            output += React[renderMethod](Element(context));
-        }
-        catch (error) {
-            throw error;
-        }
+        renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
+        var output = renderOpts.doctype;
+        Component = Component || require(filepath);
+        Element = Element || React.createFactory(Component);
+        output += React[renderOpts.renderMethod](Element(context));
 
         // node-jsx takes a long time to start up, so we delete
         // react modules from the cache so we don't need to restart
         // to see view changes (unless we're in production silly)
-        if ('production' !== process.env.NODE_ENV) {
+        if (renderOpts.removeCache) {
+            Component = undefined;
+            Element = undefined;
+
             Object.keys(require.cache).forEach(function (module) {
 
                 if (EXT_REGEX.test(module)) {
                     delete require.cache[module];
-                    Component = null;
-                    Element = null;
                 }
             });
         }

@@ -2,3 +2,6 @@
 [*.js]
 indent_style = space
 indent_size = 4
+[*.jsx]
+indent_style = space
+indent_size = 4
