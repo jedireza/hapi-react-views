@@ -19,7 +19,7 @@ var compile = function compile(template, compileOpts) {
     var Component, Element;
     require('node-jsx').install(compileOpts['node-jsx']);
 
-    return function render(context, renderOpts) {
+    return function runtime(context, renderOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
         var output = renderOpts.doctype;
