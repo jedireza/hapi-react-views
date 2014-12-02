@@ -1,14 +1,14 @@
 var Path = require('path');
 var Hoek = require('hoek');
 var React = require('react');
-require('node-jsx').install();
 
 
 var EXT_REGEX = new RegExp('\\.jsx$');
 var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
-    removeCache: 'production' !== process.env.NODE_ENV
+    removeCache: 'production' !== process.env.NODE_ENV,
+    'node-jsx': undefined
 };
 
 
@@ -17,6 +17,7 @@ var compile = function compile(template, compileOpts) {
     compileOpts = Hoek.applyToDefaults(DEFAULTS, compileOpts);
     var filepath = Path.join(process.cwd(), compileOpts.filename);
     var Component, Element;
+    require('node-jsx').install(compileOpts['node-jsx']);
 
     return function render(context, renderOpts) {
 
