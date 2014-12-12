@@ -7,7 +7,7 @@ var EXT_REGEX = new RegExp('\\.jsx$');
 var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
-    removeCache: 'production' !== process.env.NODE_ENV,
+    removeCache: process.env.NODE_ENV !== 'production',
     'node-jsx': undefined
 };
 

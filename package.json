@@ -4,7 +4,7 @@
   "description": "A hapi view engine for React components.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -c",
+    "test": "./node_modules/lab/bin/lab -c -L",
     "test-cover": "./node_modules/lab/bin/lab -c -r html -o ./test/artifacts/coverage.html && open ./test/artifacts/coverage.html"
   },
   "repository": {
