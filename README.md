@@ -29,9 +29,7 @@ Configuring the server:
 var Path = require('path');
 var Hapi = require('hapi');
 
-
 var server = new Hapi.Server(3000);
-
 
 server.views({
     engines: {

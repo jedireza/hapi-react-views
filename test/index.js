@@ -2,7 +2,7 @@ var Lab = require('lab');
 var Code = require('code');
 var Path = require('path');
 var Hapi = require('hapi');
-var hapiReactViews = require('../index');
+var HapiReactViews = require('../index');
 
 
 var lab = exports.lab = Lab.script();
@@ -12,8 +12,8 @@ lab.experiment('Engine', function () {
 
     lab.test('it is an object with a compile method', function (done) {
 
-        Code.expect(hapiReactViews).to.be.an.object();
-        Code.expect(hapiReactViews.compile).to.be.a.function();
+        Code.expect(HapiReactViews).to.be.an.object();
+        Code.expect(HapiReactViews.compile).to.be.a.function();
         done();
     });
 });
@@ -28,7 +28,7 @@ lab.experiment('Rendering', function () {
         server = new Hapi.Server(0);
         server.views({
             engines: {
-                jsx: hapiReactViews
+                jsx: HapiReactViews
             },
             path: Path.join('test', 'fixtures')
         });
