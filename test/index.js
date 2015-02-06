@@ -30,7 +30,8 @@ lab.experiment('Rendering', function () {
             engines: {
                 jsx: HapiReactViews
             },
-            path: Path.join('test', 'fixtures')
+            relativeTo: __dirname,
+            path: Path.join('fixtures')
         });
 
         done();
