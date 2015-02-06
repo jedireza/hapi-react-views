@@ -1,4 +1,3 @@
-var Path = require('path');
 var Hoek = require('hoek');
 var React = require('react');
 
@@ -15,7 +14,6 @@ var DEFAULTS = {
 var compile = function compile(template, compileOpts) {
 
     compileOpts = Hoek.applyToDefaults(DEFAULTS, compileOpts);
-    var filepath = Path.join(process.cwd(), compileOpts.filename);
     var Component, Element;
     require('node-jsx').install(compileOpts['node-jsx']);
 
@@ -23,7 +21,7 @@ var compile = function compile(template, compileOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
         var output = renderOpts.doctype;
-        Component = Component || require(filepath);
+        Component = Component || require(compileOpts.filename);
         Element = Element || React.createFactory(Component);
         output += React[renderOpts.renderMethod](Element(context));
 

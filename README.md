@@ -36,7 +36,8 @@ server.views({
         jsx: require('hapi-react-views')
     },
     compileOptions: { ... }, // optional
-    path: Path.join(__dirname, 'views')
+    relativeTo: __dirname,
+    path: Path.join('views')
 });
 ```
 
