@@ -1,6 +1,5 @@
 var Lab = require('lab');
 var Code = require('code');
-var Path = require('path');
 var Hapi = require('hapi');
 var HapiReactViews = require('../index');
 
@@ -31,7 +30,7 @@ lab.experiment('Rendering', function () {
                 jsx: HapiReactViews
             },
             relativeTo: __dirname,
-            path: Path.join('fixtures')
+            path: 'fixtures'
         });
 
         done();
