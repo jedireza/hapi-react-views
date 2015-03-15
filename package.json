@@ -27,12 +27,12 @@
     "node-jsx": "^0.12.4"
   },
   "peerDependencies": {
-    "react": "^0.12.1"
+    "react": "^0.13.x"
   },
   "devDependencies": {
     "code": "^1.2.1",
     "hapi": "^8.0.0",
     "lab": "^5.1.0",
-    "react": "^0.12.1"
+    "react": "^0.13.x"
   }
 }
