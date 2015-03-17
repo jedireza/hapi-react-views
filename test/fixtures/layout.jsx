@@ -3,16 +3,15 @@ var React = require('react');
 
 var Layout = React.createClass({
     render: function () {
-        var content = {
-            __html: this.props.content
-        };
+
+        var markup = { __html: this.props.content };
+
         return (
             <html>
                 <head>
                     <title>{this.props.title}</title>
                 </head>
-                <body dangerouslySetInnerHTML={content}>
-                </body>
+                <body dangerouslySetInnerHTML={markup}></body>
             </html>
         );
     }
