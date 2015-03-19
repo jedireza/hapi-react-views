@@ -110,6 +110,7 @@ server.render('template', context, renderOpts, function (err, output) {
 [Please refer to hapi's docs on
 `server.render(template, context, [options], callback)` for complete details.](http://hapijs.com/api#serverrendertemplate-context-options-callback)
 
+
 ## Layout views
 
 When using hapi layout views defined by
@@ -117,6 +118,7 @@ When using hapi layout views defined by
 `layout` or `layoutPath`, the rendered component is passed to your layout
 template as `props.content`. The template can render the component using
 [dangerouslySetInnerHTML](http://facebook.github.io/react/tips/dangerously-set-inner-html.html):
+
 ```
 <body dangerouslySetInnerHTML={{__html: this.props.content}}></body>
 ```
