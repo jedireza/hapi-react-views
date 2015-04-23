@@ -23,16 +23,16 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "hoek": "^2.10.0",
-    "node-jsx": "^0.12.4"
+    "hoek": "^2.x.x",
+    "node-jsx": "^0.13.x"
   },
   "peerDependencies": {
     "react": "^0.13.x"
   },
   "devDependencies": {
-    "code": "^1.2.1",
-    "hapi": "^8.0.0",
-    "lab": "^5.1.0",
+    "code": "^1.x.x",
+    "hapi": "^8.x.x",
+    "lab": "^5.x.x",
     "react": "^0.13.x"
   }
 }
