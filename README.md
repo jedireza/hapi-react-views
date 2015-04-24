@@ -80,6 +80,8 @@ The following `compileOptions` will customize how `hapi-react-views` works.
     - `renderMethod` - the method to invoke on `React` to generate our output.
        Available options are `renderToStaticMarkup` and `renderToString`.
        Defaults to `renderToStaticMarkup`.
+    - `layoutMethod` - the method to invoke on `React` to generate output for a
+        layout template when rendering a `layout` template.
     - `removeCache` - since `node-jsx` takes a while to startup, we can remove
       templates from the cache so we don't need to restart the server to see
       changes. Defaults to `'production' !== process.env.NODE_ENV`.
@@ -108,6 +110,22 @@ server.render('template', context, renderOpts, function (err, output) {
 [Please refer to hapi's docs on
 `server.render(template, context, [options], callback)` for complete details.](http://hapijs.com/api#serverrendertemplate-context-options-callback)
 
+
+## Layout views
+
+When using hapi layout views defined by
+[`server.views` options](http://hapijs.com/api#serverviewsoptions)
+`layout` or `layoutPath`, the rendered component is passed to your layout
+template as `props.content`. The template can render the component using
+[dangerouslySetInnerHTML](http://facebook.github.io/react/tips/dangerously-set-inner-html.html):
+
+```
+<body dangerouslySetInnerHTML={{__html: this.props.content}}></body>
+```
+
+You can control the `React` render mechanism separately for layout views with
+`compileOptions.layoutMethod` to enable re-mounting the rendered component on the
+client, without unnecessarily polluting the layout HTML with `data-react-id` attributes.
 
 ## License
 
