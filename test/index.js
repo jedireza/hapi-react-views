@@ -37,6 +37,41 @@ lab.experiment('Rendering', function () {
     });
 
 
+    lab.test('it successfully renders with jsx compilation turned off', function (done) {
+
+        var context = { title: 'Woot, with no jsx options.' };
+        var renderOpts = {
+            runtimeOptions: {
+                useNodeJsx: false
+            }
+        };
+
+        server.render('view-precompiled', context, renderOpts, function (err, output) {
+
+            Code.expect(err).to.not.exist();
+            done();
+        });
+    });
+
+
+    lab.test('it fails if rendering jsx with jsx compilation turned off', function (done) {
+
+        var context = { title: 'Ooops, node-jsx is disabled.' };
+        var renderOpts = {
+            runtimeOptions: {
+                useNodeJsx: false
+            }
+        };
+
+        server.render('view', context, renderOpts, function (err, output) {
+
+            Code.expect(err).to.exist();
+            done();
+        });
+    });
+
+
+
     lab.test('it returns an error when the path misses', function (done) {
 
         var context = { title: 'Woops.' };
@@ -92,7 +127,7 @@ lab.experiment('Rendering', function () {
 
             Code.expect(err).to.not.exist();
 
-            server.render('view', context, renderOpts, function (err, output) {
+            server.render('view', context, renderOpts, function (err, out) {
 
                 Code.expect(err).to.not.exist();
                 done();
