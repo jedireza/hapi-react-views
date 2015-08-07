@@ -7,19 +7,22 @@ var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
     removeCache: process.env.NODE_ENV !== 'production',
+    useNodeJsx: true,
     'node-jsx': undefined
 };
 
 
-var compile = function compile(template, compileOpts) {
+var compile = function compile (template, compileOpts) {
 
     compileOpts = Hoek.applyToDefaults(DEFAULTS, compileOpts);
     var Component, Element;
-    require('node-jsx').install(compileOpts['node-jsx']);
 
-    return function runtime(context, renderOpts) {
+    return function runtime (context, renderOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
+        if (renderOpts.useNodeJsx === true) {
+            require('node-jsx').install(compileOpts['node-jsx']);
+        }
         var output = renderOpts.doctype;
         Component = Component || require(compileOpts.filename);
         Element = Element || React.createFactory(Component);

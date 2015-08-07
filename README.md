@@ -83,6 +83,9 @@ The following `compileOptions` will customize how `hapi-react-views` works.
     - `removeCache` - since `node-jsx` takes a while to startup, we can remove
       templates from the cache so we don't need to restart the server to see
       changes. Defaults to `'production' !== process.env.NODE_ENV`.
+    - `useNodeJsx` - a boolean that controls if `node-jsx` is used. Defaults to
+      `true`. Set to `false` if you're using another transformer (ex:
+      `babel/require`) or don't need `jsx` transformations.
     - `node-jsx` - options object passed to
       [`node-jsx`](https://github.com/petehunt/node-jsx)'s `install` method.
       Defaults to `undefined`.
