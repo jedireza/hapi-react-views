@@ -23,20 +23,33 @@ on `react` via `peerDependencies`.
 
 ## Usage
 
-Configuring the server:
+Note: As of hapi v9.x, your project must register the
+[`vision`](https://github.com/hapijs/vision) plugin in order for the
+`server.views()` method to be available.
+
+Configuring the server manually:
 
 ```js
 var Hapi = require('hapi');
+var Vision = require('vision');
+var HapiReactViews = require('hapi-react-views');
 
-var server = new Hapi.Server(3000);
+var server = new Hapi.Server();
 
-server.views({
-    engines: {
-        jsx: require('hapi-react-views')
-    },
-    compileOptions: { ... }, // optional
-    relativeTo: __dirname,
-    path: 'views'
+server.register(Vision, function (err) {
+
+    if (err) {
+        console.log("Failed to load vision.");
+    }
+
+    server.views({
+        engines: {
+            jsx: HapiReactViews
+        },
+        compileOptions: {}, // optional
+        relativeTo: __dirname,
+        path: 'views'
+    });
 });
 ```
 
@@ -49,11 +62,12 @@ Configuring with a CLI manifest using
         "port": 8080
     }],
     "plugins": {
+        "vision": {},
         "visionary": {
             "engines": {
               "jsx": "hapi-react-views"
             },
-            "compileOptions": { ... },
+            "compileOptions": {},
             "path": "./views"
         }
     }
@@ -65,8 +79,8 @@ Configuring with a CLI manifest using
 
 ### `server.views(options)`
 
-[Please refer to hapi's docs on
-`server.views(options)` for complete details.](http://hapijs.com/api#serverviewsoptions)
+[Please refer to the `vision` docs on
+`server.views(options)` for complete details.](https://github.com/hapijs/vision/blob/master/API.md#serverviewsoptions)
 
 We'll be focusing on the `compileOptions` property that you can include when
 passing `options` to `server.views`.
@@ -104,12 +118,12 @@ var renderOpts = {
 
 server.render('template', context, renderOpts, function (err, output) {
 
-    ...
+    // ...
 });
 ```
 
-[Please refer to hapi's docs on
-`server.render(template, context, [options], callback)` for complete details.](http://hapijs.com/api#serverrendertemplate-context-options-callback)
+[Please refer to `vision`'s docs on
+`server.render(template, context, [options], callback)` for complete details.](https://github.com/hapijs/vision/blob/master/API.md#serverrendertemplate-context-options-callback)
 
 
 ## License
