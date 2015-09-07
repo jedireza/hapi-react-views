@@ -1,6 +1,7 @@
 var Lab = require('lab');
 var Code = require('code');
 var Hapi = require('hapi');
+var Vision = require('vision');
 var HapiReactViews = require('../index');
 
 
@@ -25,15 +26,23 @@ lab.experiment('Rendering', function () {
     lab.beforeEach(function (done) {
 
         server = new Hapi.Server(0);
-        server.views({
-            engines: {
-                jsx: HapiReactViews
-            },
-            relativeTo: __dirname,
-            path: 'fixtures'
-        });
 
-        done();
+        server.register(Vision, function (err) {
+
+            if (err) {
+                return done(err);
+            }
+
+            server.views({
+                engines: {
+                    jsx: HapiReactViews
+                },
+                relativeTo: __dirname,
+                path: 'fixtures'
+            });
+
+            done();
+        });
     });
 
 
