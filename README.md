@@ -2,9 +2,10 @@
 
 A hapi view engine for React components.
 
-[![Dependency Status](https://david-dm.org/jedireza/hapi-react-views.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views)
-[![devDependency Status](https://david-dm.org/jedireza/hapi-react-views/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views#info=devDependencies)
 [![Build Status](https://travis-ci.org/jedireza/hapi-react-views.svg?branch=master)](https://travis-ci.org/jedireza/hapi-react-views)
+[![Dependency Status](https://david-dm.org/jedireza/hapi-react-views.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views)
+[![Peer Dependency Status](https://david-dm.org/jedireza/hapi-react-views/peer-status.svg?style=flat)](https://david-dm.org/jedireza/hapi-react-views#info=peerDependencies)
+[![Dev Dependency Status](https://david-dm.org/jedireza/hapi-react-views/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views#info=devDependencies)
 
 By default, we render static markup. We can also choose to use
 `React.renderToString`, preserving the `data-react-id` attributes so
@@ -124,6 +125,46 @@ server.render('template', context, renderOpts, function (err, output) {
 
 [Please refer to `vision`'s docs on
 `server.render(template, context, [options], callback)` for complete details.](https://github.com/hapijs/vision/blob/master/API.md#serverrendertemplate-context-options-callback)
+
+
+## Examples
+
+Before you can run the examples, you need to clone this repo and install the dependencies.
+
+```bash
+$ git clone git@github.com:jedireza/hapi-react-views.git
+$ cd hapi-react-views
+$ npm install
+```
+
+### Rendering a simple page
+
+This example renders a simple component as HTML output. [View the
+code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/simple)
+
+```bash
+$ npm run simple-example
+```
+
+### Rendering with layouts
+
+This example is renders simple components as HTML but adds the idea of using
+layouts. [View the
+code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/layout)
+
+```bash
+$ npm run layout-example
+```
+
+### Remounting on the client (universal/isomorphic)
+
+This example demonstrates the idea of remounting client side in order to create
+universal/isomorphic applications. [View the
+code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/remount)
+
+```bash
+$ npm run remount-example
+```
 
 
 ## License
