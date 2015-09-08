@@ -35,11 +35,11 @@
   "devDependencies": {
     "code": "^1.x.x",
     "hapi": "^9.x.x",
-    "inert": "^3.0.1",
-    "jsx-loader": "^0.13.2",
+    "inert": "^3.x.x",
+    "jsx-loader": "^0.13.x",
     "lab": "^5.x.x",
     "react": "^0.13.x",
-    "vision": "^3.0.0",
-    "webpack": "^1.12.1"
+    "vision": "^3.x.x",
+    "webpack": "^1.x.x"
   }
 }
