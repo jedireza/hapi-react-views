@@ -5,6 +5,9 @@ var Vision = require('vision');
 var HapiReactViews = require('../..');
 
 
+require('babel/register')({});
+
+
 var server = new Hapi.Server();
 server.connection();
 server.register([Inert, Vision], function (err) {
@@ -35,7 +38,7 @@ server.register([Inert, Vision], function (err) {
         handler: function (request, reply) {
 
             var appContext = {
-                foo: 'bar'
+                foo: 'baz'
             };
             var renderOpts = {
                 runtimeOptions: {
