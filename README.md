@@ -7,8 +7,8 @@ A hapi view engine for React components.
 [![Peer Dependency Status](https://david-dm.org/jedireza/hapi-react-views/peer-status.svg?style=flat)](https://david-dm.org/jedireza/hapi-react-views#info=peerDependencies)
 [![Dev Dependency Status](https://david-dm.org/jedireza/hapi-react-views/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views#info=devDependencies)
 
-By default, we render static markup. We can also choose to use
-`React.renderToString`, preserving the `data-react-id` attributes so
+By default, we render static markup using `renderToStaticMarkup`. We can also
+choose to use `renderToString`, preserving the `data-react-id` attributes so
 re-mounting client side is possible.
 
 
@@ -18,15 +18,24 @@ re-mounting client side is possible.
 $ npm install hapi-react-views
 ```
 
-Note: Your project should have it's own `react` dependency installed. We depend
-on `react` via `peerDependencies`.
+Note: Your project should have it's own `react` and `react-dom` dependencies
+installed. We depend on these via `peerDependencies`.
 
 
 ## Usage
 
-Note: As of hapi v9.x, your project must register the
-[`vision`](https://github.com/hapijs/vision) plugin in order for the
-`server.views()` method to be available.
+Note: As of `hapi-react-views` v4.x your project must register a transpiler
+such as [`babel`][babel] or [`node-jsx`][node-jsx]. An alternative to this is
+to transpile ahead of time and save the result to file.
+
+[babel]: https://github.com/babel/babel
+[node-jsx]: https://github.com/petehunt/node-jsx
+
+Note: As of `hapi` v9.x, your project must register the [`vision`][vision]
+plugin in order for the `server.views()` and `server.render()` methods to be
+available.
+
+[vision]: https://github.com/hapijs/vision
 
 Configuring the server manually:
 
@@ -34,6 +43,8 @@ Configuring the server manually:
 var Hapi = require('hapi');
 var Vision = require('vision');
 var HapiReactViews = require('hapi-react-views');
+
+require('babel/register')({});
 
 var server = new Hapi.Server();
 
@@ -54,8 +65,9 @@ server.register(Vision, function (err) {
 });
 ```
 
-Configuring with a CLI manifest using
-[`visionary`](https://github.com/hapijs/visionary):
+Configuring with a CLI manifest using [`visionary`][visionary]:
+
+[visionary]: https://github.com/hapijs/visionary
 
 ```json
 {
@@ -80,8 +92,10 @@ Configuring with a CLI manifest using
 
 ### `server.views(options)`
 
-[Please refer to the `vision` docs on
-`server.views(options)` for complete details.](https://github.com/hapijs/vision/blob/master/API.md#serverviewsoptions)
+[Please refer to the `vision` docs on `server.views(options)` for complete
+details.][vision-docs]
+
+[vision-docs]: https://github.com/hapijs/vision/blob/master/API.md#serverviewsoptions
 
 We'll be focusing on the `compileOptions` property that you can include when
 passing `options` to `server.views`.
@@ -93,20 +107,13 @@ The following `compileOptions` will customize how `hapi-react-views` works.
     - `doctype` - a simple string prepended to the response. Defaults to
       `<!DOCTYPE html>`
     - `renderMethod` - the method to invoke on `React` to generate our output.
-       Available options are `renderToStaticMarkup` and `renderToString`.
-       Defaults to `renderToStaticMarkup`.
-    - `removeCache` - since `node-jsx` takes a while to startup, we can remove
-      templates from the cache so we don't need to restart the server to see
-      changes. Defaults to `'production' !== process.env.NODE_ENV`.
-    - `useNodeJsx` - a boolean that controls if `node-jsx` is used. Defaults to
-      `true`. Set to `false` if you're using another transformer (ex:
-      `babel/require`) or don't need `jsx` transformations.
-    - `node-jsx` - options object passed to
-      [`node-jsx`](https://github.com/petehunt/node-jsx)'s `install` method.
-      Defaults to `undefined`.
+      Available options are `renderToStaticMarkup` and `renderToString`.
+      Defaults to `renderToStaticMarkup`.
+    - `removeCache` - since transpilers tend to take a while to startup, we can
+      remove templates from the require cache so we don't need to restart the
+      server to see changes. Defaults to `'production' !== process.env.NODE_ENV`.
 
-You're able to override all these `compileOptions` at runtime except `node-jsx`
-which only happens once.
+You're able to override all these `compileOptions` at runtime.
 
 ```js
 var context = { name: 'Steve' };
@@ -140,7 +147,9 @@ $ npm install
 ### Rendering a simple page
 
 This example renders a simple component as HTML output. [View the
-code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/simple)
+code.][ex-simple]
+
+[ex-simple]: https://github.com/jedireza/hapi-react-views/tree/master/examples/simple
 
 ```bash
 $ npm run simple-example
@@ -149,8 +158,9 @@ $ npm run simple-example
 ### Rendering with layouts
 
 This example is renders simple components as HTML but adds the idea of using
-layouts. [View the
-code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/layout)
+layouts. [View the code.][ex-layouts]
+
+[ex-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout
 
 ```bash
 $ npm run layout-example
@@ -159,8 +169,9 @@ $ npm run layout-example
 ### Remounting on the client (universal/isomorphic)
 
 This example demonstrates the idea of remounting client side in order to create
-universal/isomorphic applications. [View the
-code.](https://github.com/jedireza/hapi-react-views/tree/master/examples/remount)
+universal/isomorphic applications. [View the code.][ex-remount]
+
+[ex-remount]: https://github.com/jedireza/hapi-react-views/tree/master/examples/remount
 
 ```bash
 $ npm run remount-example

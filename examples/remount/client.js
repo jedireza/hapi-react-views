@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var AppComponent = require('./components/app.jsx');
 
 
@@ -7,4 +8,4 @@ var mountNode = document.getElementById('app-mount');
 var serverState = window.state;
 
 
-React.render(App(serverState), mountNode);
+ReactDOM.render(App(serverState), mountNode);

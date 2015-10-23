@@ -5,6 +5,9 @@ var Vision = require('vision');
 var HapiReactViews = require('../index');
 
 
+require('babel/register')({});
+
+
 var lab = exports.lab = Lab.script();
 
 
@@ -44,41 +47,6 @@ lab.experiment('Rendering', function () {
             done();
         });
     });
-
-
-    lab.test('it successfully renders with jsx compilation turned off', function (done) {
-
-        var context = { title: 'Woot, with no jsx options.' };
-        var renderOpts = {
-            runtimeOptions: {
-                useNodeJsx: false
-            }
-        };
-
-        server.render('view-precompiled', context, renderOpts, function (err, output) {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
-    });
-
-
-    lab.test('it fails if rendering jsx with jsx compilation turned off', function (done) {
-
-        var context = { title: 'Ooops, node-jsx is disabled.' };
-        var renderOpts = {
-            runtimeOptions: {
-                useNodeJsx: false
-            }
-        };
-
-        server.render('view', context, renderOpts, function (err, output) {
-
-            Code.expect(err).to.exist();
-            done();
-        });
-    });
-
 
 
     lab.test('it returns an error when the path misses', function (done) {
@@ -123,7 +91,7 @@ lab.experiment('Rendering', function () {
     });
 
 
-    lab.test('it demonstrates caching', function (done) {
+    lab.test('it demonstrates keeping the require cache', function (done) {
 
         var context = { title: 'Woot, it rendered.' };
         var renderOpts = {

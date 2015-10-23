@@ -5,7 +5,7 @@ var Component = React.createClass({
     render: function () {
 
         return (
-            <div>Foo: {this.props.foo}</div>
+            <div>Foo: ({this.props.foo})</div>
         );
     }
 });

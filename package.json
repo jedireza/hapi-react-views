@@ -4,7 +4,7 @@
   "description": "A hapi view engine for React components.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -c -L",
+    "test": "./node_modules/lab/bin/lab -c -L -I 'Reflect,core,_babelPolyfill,regeneratorRuntime,__core-js_shared__'",
     "test-cover": "./node_modules/lab/bin/lab -c -r html -o ./test/artifacts/coverage.html && open ./test/artifacts/coverage.html",
     "simple-example": "node ./examples/simple/server",
     "layout-example": "node ./examples/layout/server",
@@ -17,7 +17,9 @@
   "keywords": [
     "hapi",
     "react",
-    "views"
+    "views",
+    "universal",
+    "isomorphic"
   ],
   "author": "Reza Akhavan <jedireza@gmail.com> (http://reza.akhavan.me/)",
   "license": "MIT",
@@ -26,21 +28,22 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "hoek": "^2.x.x",
-    "node-jsx": "^0.13.x"
+    "hoek": "^2.x.x"
   },
   "peerDependencies": {
     "react": "^0.14.x ",
     "react-dom": "^0.14.x "
   },
   "devDependencies": {
+    "babel": "^5.x.x",
+    "babel-core": "^5.x.x",
+    "babel-loader": "^5.x.x",
     "code": "^1.x.x",
-    "hapi": "^9.x.x",
+    "hapi": "^11.x.x",
     "inert": "^3.x.x",
-    "jsx-loader": "^0.13.x",
-    "lab": "^5.x.x",
+    "lab": "^6.x.x",
     "react": "^0.14.x ",
-    "react-dom": "^0.14.x ",
+    "react-dom": "^0.14.x",
     "vision": "^3.x.x",
     "webpack": "^1.x.x"
   }
