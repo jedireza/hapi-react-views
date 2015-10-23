@@ -30,7 +30,8 @@
     "node-jsx": "^0.13.x"
   },
   "peerDependencies": {
-    "react": "^0.13.x"
+    "react": "^0.14.x ",
+    "react-dom": "^0.14.x "
   },
   "devDependencies": {
     "code": "^1.x.x",
@@ -38,7 +39,8 @@
     "inert": "^3.x.x",
     "jsx-loader": "^0.13.x",
     "lab": "^5.x.x",
-    "react": "^0.13.x",
+    "react": "^0.14.x ",
+    "react-dom": "^0.14.x ",
     "vision": "^3.x.x",
     "webpack": "^1.x.x"
   }

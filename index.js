@@ -1,5 +1,6 @@
 var Hoek = require('hoek');
 var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 
 
 var EXT_REGEX = new RegExp('\\.jsx$');
@@ -26,7 +27,7 @@ var compile = function compile (template, compileOpts) {
         var output = renderOpts.doctype;
         Component = Component || require(compileOpts.filename);
         Element = Element || React.createFactory(Component);
-        output += React[renderOpts.renderMethod](Element(context));
+        output += ReactDOMServer[renderOpts.renderMethod](Element(context));
 
         // node-jsx takes a long time to start up, so we delete
         // react modules from the cache so we don't need to restart
