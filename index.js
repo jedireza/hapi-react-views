@@ -2,8 +2,8 @@ var Hoek = require('hoek');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 
-var EXT_REGEX = new RegExp('\\.jsx$');
 
+var EXT_REGEX = new RegExp('\\.jsx$');
 var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
