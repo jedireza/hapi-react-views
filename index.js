@@ -20,6 +20,9 @@ var compile = function compile (template, compileOpts) {
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
         var Component = require(compileOpts.filename);
+        // support es6 default export semantics
+        Component = Component.default || Component;
+
         var Element = React.createFactory(Component);
 
         var output = renderOpts.doctype;
