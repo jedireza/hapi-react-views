@@ -3,6 +3,11 @@ var Vision = require('vision');
 var HapiReactViews = require('../..');
 
 
+require('babel-core/register')({
+    presets: ['react', 'es2015']
+});
+
+
 var server = new Hapi.Server();
 server.connection();
 server.register(Vision, function (err) {
