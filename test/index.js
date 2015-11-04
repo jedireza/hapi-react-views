@@ -5,7 +5,7 @@ var Vision = require('vision');
 var HapiReactViews = require('../index');
 
 
-require('babel/register')({});
+require('babel-core/register')({});
 
 
 var lab = exports.lab = Lab.script();
