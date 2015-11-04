@@ -3,16 +3,23 @@ language: node_js
 node_js:
   - "4"
   - "5"
+# Directories we want to cache between each build
+
 cache:
   apt: true
   directories:
     - 'node_modules'
+
+# Addons we want to set up
 addons:
+  # System install
   apt:
     sources:
-      - 'ubuntu-toolchain-r-test'
+    - 'ubuntu-toolchain-r-test'
     packages:
-      - 'gcc-4.8'
-      - 'g++-4.8'
+    - 'gcc-4.8'
+    - 'g++-4.8'
+
+# Environment variables we want to set
 env:
   - 'CXX=g++-4.8'
