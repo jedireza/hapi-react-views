@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "lab -c -L -I 'Reflect,core,_babelPolyfill,regeneratorRuntime,__core-js_shared__'",
-    "test-cover": "lab -c -r html -o ./test/artifacts/coverage.html && open test/artifacts/coverage.html",
+    "test-cover": "lab -c -r html -o test/artifacts/coverage.html && open test/artifacts/coverage.html",
     "simple-example": "node examples/simple/server",
     "layout-example": "node examples/layout/server",
     "remount-example": "webpack --config examples/remount/webpack.js && node examples/remount/server"
