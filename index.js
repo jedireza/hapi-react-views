@@ -2,8 +2,8 @@ var Hoek = require('hoek');
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 
-var EXT_REGEX = new RegExp('\\.jsx$');
 
+var EXT_REGEX = new RegExp('\\.jsx$');
 var DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
@@ -20,7 +20,7 @@ var compile = function compile (template, compileOpts) {
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
         var Component = require(compileOpts.filename);
-        // Transpiled ES6 may export components as { default: Component }
+        // support es6 default export semantics
         Component = Component.default || Component;
 
         var Element = React.createFactory(Component);
