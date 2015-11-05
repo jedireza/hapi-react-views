@@ -1,9 +1,9 @@
-var React = require('react');
-var Layout = require('./layout.jsx');
+const React = require('react');
+const Layout = require('./layout.jsx');
 
 
-var Component = React.createClass({
-    render: function () {
+const Component = React.createClass({
+    render () {
 
         return (
             <Layout title="Home Page">
