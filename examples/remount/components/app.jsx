@@ -1,8 +1,8 @@
-var React = require('react');
+const React = require('react');
 
 
-var Component = React.createClass({
-    render: function () {
+const Component = React.createClass({
+    render () {
 
         return (
             <div>Foo: ({this.props.foo})</div>

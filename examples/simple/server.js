@@ -1,16 +1,17 @@
-var Hapi = require('hapi');
-var Vision = require('vision');
-var HapiReactViews = require('../..');
+'use strict';
 
+const Hapi = require('hapi');
+const Vision = require('vision');
+const HapiReactViews = require('../..');
 
 require('babel-core/register')({
     presets: ['react', 'es2015']
 });
 
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection();
-server.register(Vision, function (err) {
+server.register(Vision, (err) => {
 
     if (err) {
         console.log('Failed to load vision.');
@@ -27,18 +28,18 @@ server.register(Vision, function (err) {
     server.route({
         method: 'GET',
         path: '/',
-        handler: function (request, reply) {
+        handler: (request, reply) => {
 
             reply.view('home');
         }
     });
 
-    server.start(function (err) {
+    server.start((err) => {
 
         if (err) {
             throw err;
         }
 
-        console.log('Server is listening at ' + server.info.uri);
+        console.log(`Server is listening at ${server.info.uri}`);
     });
 });
