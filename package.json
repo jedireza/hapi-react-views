@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "hoek": "^2.x.x"
+    "hoek": "^3.x.x"
   },
   "peerDependencies": {
     "react": "^0.14.x ",
