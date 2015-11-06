@@ -5,7 +5,9 @@ var Vision = require('vision');
 var HapiReactViews = require('../index');
 
 
-require('babel/register')({});
+require('babel-core/register')({
+    presets: ['react', 'es2015']
+});
 
 
 var lab = exports.lab = Lab.script();
@@ -66,6 +68,18 @@ lab.experiment('Rendering', function () {
         var context = { title: 'Woot, it rendered.' };
 
         server.render('view', context, function (err, output) {
+
+            Code.expect(err).to.not.exist();
+            done();
+        });
+    });
+
+
+    lab.test('it successfully renders with es6 export semantics', function (done) {
+
+        var context = { title: 'Woot, it rendered.' };
+
+        server.render('view-es6', context, function (err, output) {
 
             Code.expect(err).to.not.exist();
             done();

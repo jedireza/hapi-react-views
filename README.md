@@ -40,18 +40,20 @@ available.
 Configuring the server manually:
 
 ```js
-var Hapi = require('hapi');
-var Vision = require('vision');
-var HapiReactViews = require('hapi-react-views');
+import Hapi from 'hapi';
+import Vision from 'vision';
+import HapiReactViews from 'hapi-react-views';
 
-require('babel/register')({});
+require('babel-core/register')({
+    presets: ['react', 'es2015']
+});
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 
 server.register(Vision, function (err) {
 
     if (err) {
-        console.log("Failed to load vision.");
+        console.log('Failed to load vision.');
     }
 
     server.views({
@@ -116,8 +118,8 @@ The following `compileOptions` will customize how `hapi-react-views` works.
 You're able to override all these `compileOptions` at runtime.
 
 ```js
-var context = { name: 'Steve' };
-var renderOpts = {
+const context = { name: 'Steve' };
+const renderOpts = {
     runtimeOptions: {
         doctype: '<!DOCTYPE html>',
         renderMethod: 'renderToString'
