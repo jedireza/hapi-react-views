@@ -40,9 +40,9 @@ available.
 Configuring the server manually:
 
 ```js
-import Hapi from 'hapi';
-import Vision from 'vision';
-import HapiReactViews from 'hapi-react-views';
+const Hapi = require('hapi');
+const Vision = require('vision');
+const HapiReactViews = require('hapi-react-views');
 
 require('babel-core/register')({
     presets: ['react', 'es2015']
