@@ -1,4 +1,6 @@
-var Path = require('path');
+'use strict';
+
+const Path = require('path');
 
 
 module.exports = {

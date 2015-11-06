@@ -1,11 +1,13 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var AppComponent = require('./components/app.jsx');
+'use strict';
+
+const React = require('react');
+const ReactDOM = require('react-dom');
+const AppComponent = require('./components/app.jsx');
 
 
-var App = React.createFactory(AppComponent);
-var mountNode = document.getElementById('app-mount');
-var serverState = window.state;
+const App = React.createFactory(AppComponent);
+const mountNode = document.getElementById('app-mount');
+const serverState = window.state;
 
 
 ReactDOM.render(App(serverState), mountNode);
