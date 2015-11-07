@@ -1,8 +1,10 @@
-var Path = require('path');
-var Hapi = require('hapi');
-var Inert = require('inert');
-var Vision = require('vision');
-var HapiReactViews = require('../..');
+'use strict';
+
+const Path = require('path');
+const Hapi = require('hapi');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiReactViews = require('../..');
 
 
 require('babel-core/register')({
@@ -10,9 +12,9 @@ require('babel-core/register')({
 });
 
 
-var server = new Hapi.Server();
+const server = new Hapi.Server();
 server.connection();
-server.register([Inert, Vision], function (err) {
+server.register([Inert, Vision], (err) => {
 
     if (err) {
         console.log('Failed to load plugins.');
@@ -37,25 +39,25 @@ server.register([Inert, Vision], function (err) {
     server.route({
         method: 'GET',
         path: '/',
-        handler: function (request, reply) {
+        handler: (request, reply) => {
 
-            var appContext = {
+            const appContext = {
                 foo: 'baz'
             };
-            var renderOpts = {
+            const renderOpts = {
                 runtimeOptions: {
                     renderMethod: 'renderToString'
                 }
             };
 
-            server.render('app', appContext, renderOpts, function (err, appOutput) {
+            server.render('app', appContext, renderOpts, (err, appOutput) => {
 
-                var htmlContext = {
+                const htmlContext = {
                     remount: appOutput,
                     state: 'window.state = ' + JSON.stringify(appContext) + ';'
                 };
 
-                server.render('html', htmlContext, function (err, htmlOutput) {
+                server.render('html', htmlContext, (err, htmlOutput) => {
 
                     reply(htmlOutput);
                 });
@@ -63,7 +65,7 @@ server.register([Inert, Vision], function (err) {
         }
     });
 
-    server.start(function (err) {
+    server.start((err) => {
 
         if (err) {
             throw err;

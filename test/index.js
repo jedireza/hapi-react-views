@@ -1,8 +1,10 @@
-var Lab = require('lab');
-var Code = require('code');
-var Hapi = require('hapi');
-var Vision = require('vision');
-var HapiReactViews = require('../index');
+'use strict';
+
+const Lab = require('lab');
+const Code = require('code');
+const Hapi = require('hapi');
+const Vision = require('vision');
+const HapiReactViews = require('../index');
 
 
 require('babel-core/register')({
@@ -10,12 +12,12 @@ require('babel-core/register')({
 });
 
 
-var lab = exports.lab = Lab.script();
+const lab = exports.lab = Lab.script();
 
 
-lab.experiment('Engine', function () {
+lab.experiment('Engine', () => {
 
-    lab.test('it is an object with a compile method', function (done) {
+    lab.test('it is an object with a compile method', (done) => {
 
         Code.expect(HapiReactViews).to.be.an.object();
         Code.expect(HapiReactViews.compile).to.be.a.function();
@@ -24,15 +26,15 @@ lab.experiment('Engine', function () {
 });
 
 
-lab.experiment('Rendering', function () {
+lab.experiment('Rendering', () => {
 
-    var server;
+    let server;
 
-    lab.beforeEach(function (done) {
+    lab.beforeEach((done) => {
 
         server = new Hapi.Server(0);
 
-        server.register(Vision, function (err) {
+        server.register(Vision, (err) => {
 
             if (err) {
                 return done(err);
@@ -51,11 +53,11 @@ lab.experiment('Rendering', function () {
     });
 
 
-    lab.test('it returns an error when the path misses', function (done) {
+    lab.test('it returns an error when the path misses', (done) => {
 
-        var context = { title: 'Woops.' };
+        const context = { title: 'Woops.' };
 
-        server.render('viewz', context, function (err, output) {
+        server.render('viewz', context, (err, output) => {
 
             Code.expect(err).to.be.an.object();
             done();
@@ -63,23 +65,11 @@ lab.experiment('Rendering', function () {
     });
 
 
-    lab.test('it successfully renders', function (done) {
+    lab.test('it successfully renders', (done) => {
 
-        var context = { title: 'Woot, it rendered.' };
+        const context = { title: 'Woot, it rendered.' };
 
-        server.render('view', context, function (err, output) {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
-    });
-
-
-    lab.test('it successfully renders with es6 export semantics', function (done) {
-
-        var context = { title: 'Woot, it rendered.' };
-
-        server.render('view-es6', context, function (err, output) {
+        server.render('view', context, (err, output) => {
 
             Code.expect(err).to.not.exist();
             done();
@@ -87,17 +77,29 @@ lab.experiment('Rendering', function () {
     });
 
 
-    lab.test('it successfully renders with runtime options', function (done) {
+    lab.test('it successfully renders with es6 export semantics', (done) => {
 
-        var context = { title: 'Woot, with runtime options.' };
-        var renderOpts = {
+        const context = { title: 'Woot, it rendered.' };
+
+        server.render('view-es6', context, (err, output) => {
+
+            Code.expect(err).to.not.exist();
+            done();
+        });
+    });
+
+
+    lab.test('it successfully renders with runtime options', (done) => {
+
+        const context = { title: 'Woot, with runtime options.' };
+        const renderOpts = {
             runtimeOptions: {
                 doctype: '<!DOCTYPE html>',
                 renderMethod: 'renderToString'
             }
         };
 
-        server.render('view', context, renderOpts, function (err, output) {
+        server.render('view', context, renderOpts, (err, output) => {
 
             Code.expect(err).to.not.exist();
             done();
@@ -105,20 +107,20 @@ lab.experiment('Rendering', function () {
     });
 
 
-    lab.test('it demonstrates keeping the require cache', function (done) {
+    lab.test('it demonstrates keeping the require cache', (done) => {
 
-        var context = { title: 'Woot, it rendered.' };
-        var renderOpts = {
+        const context = { title: 'Woot, it rendered.' };
+        const renderOpts = {
             runtimeOptions: {
                 removeCache: false
             }
         };
 
-        server.render('view', context, renderOpts, function (err, output) {
+        server.render('view', context, renderOpts, (err, output) => {
 
             Code.expect(err).to.not.exist();
 
-            server.render('view', context, renderOpts, function (err, out) {
+            server.render('view', context, renderOpts, (err, out) => {
 
                 Code.expect(err).to.not.exist();
                 done();
