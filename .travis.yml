@@ -3,11 +3,14 @@ language: node_js
 node_js:
   - "4"
   - "5"
+
+# Directories we want to cache between each build
 cache:
   apt: true
   directories:
     - 'node_modules'
 addons:
+  # System install
   apt:
     sources:
       - 'ubuntu-toolchain-r-test'

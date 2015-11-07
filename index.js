@@ -1,31 +1,33 @@
-var Hoek = require('hoek');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
+'use strict';
+
+const Hoek = require('hoek');
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
 
 
-var EXT_REGEX = new RegExp('\\.jsx$');
-var DEFAULTS = {
+const EXT_REGEX = new RegExp('\\.jsx$');
+const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
     removeCache: process.env.NODE_ENV !== 'production'
 };
 
 
-var compile = function compile (template, compileOpts) {
+const compile = (template, compileOpts) => {
 
     compileOpts = Hoek.applyToDefaults(DEFAULTS, compileOpts);
 
-    return function runtime (context, renderOpts) {
+    return (context, renderOpts) => {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
-        var Component = require(compileOpts.filename);
+        let Component = require(compileOpts.filename);
         // support es6 default export semantics
         Component = Component.default || Component;
 
-        var Element = React.createFactory(Component);
+        let Element = React.createFactory(Component);
 
-        var output = renderOpts.doctype;
+        let output = renderOpts.doctype;
         output += ReactDOMServer[renderOpts.renderMethod](Element(context));
 
         // transpilers tend to take a long time to start up, so we delete react
@@ -35,7 +37,7 @@ var compile = function compile (template, compileOpts) {
             Component = undefined;
             Element = undefined;
 
-            Object.keys(require.cache).forEach(function (module) {
+            Object.keys(require.cache).forEach((module) => {
 
                 if (EXT_REGEX.test(module)) {
                     delete require.cache[module];
@@ -46,7 +48,6 @@ var compile = function compile (template, compileOpts) {
         return output;
     };
 };
-
 
 module.exports = {
     compile: compile
