@@ -50,7 +50,7 @@ require('babel-core/register')({
 
 const server = new Hapi.Server();
 
-server.register(Vision, function (err) {
+server.register(Vision, (err) => {
 
     if (err) {
         console.log('Failed to load vision.');
