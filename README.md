@@ -126,7 +126,7 @@ const renderOpts = {
     }
 };
 
-server.render('template', context, renderOpts, function (err, output) {
+server.render('template', context, renderOpts, (err, output) => {
 
     // ...
 });
