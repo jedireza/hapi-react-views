@@ -13,11 +13,11 @@ const DEFAULTS = {
 };
 
 
-const compile = function compile (template, compileOpts) {
+const compile = function compile(template, compileOpts) {
 
     compileOpts = Hoek.applyToDefaults(DEFAULTS, compileOpts);
 
-    return function runtime (context, renderOpts) {
+    return function runtime(context, renderOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
