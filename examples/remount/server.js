@@ -52,12 +52,20 @@ server.register([Inert, Vision], (err) => {
 
             server.render('app', appContext, renderOpts, (err, appOutput) => {
 
+                if (err) {
+                    return reply(err);
+                }
+
                 const htmlContext = {
                     remount: appOutput,
                     state: 'window.state = ' + JSON.stringify(appContext) + ';'
                 };
 
                 server.render('html', htmlContext, (err, htmlOutput) => {
+
+                    if (err) {
+                        return reply(err);
+                    }
 
                     reply(htmlOutput);
                 });
