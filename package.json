@@ -31,8 +31,8 @@
     "hoek": "3.x.x"
   },
   "peerDependencies": {
-    "react": "15.0.x",
-    "react-dom": "0.14.x "
+    "react": "15.x.x",
+    "react-dom": "15.x.x "
   },
   "devDependencies": {
     "babel": "6.x.x",
@@ -44,8 +44,8 @@
     "hapi": "13.x.x",
     "inert": "3.x.x",
     "lab": "10.x.x",
-    "react": "15.0.x",
-    "react-dom": "15.0.x",
+    "react": "15.x.x",
+    "react-dom": "15.x.x",
     "vision": "4.x.x",
     "webpack": "1.x.x"
   }
