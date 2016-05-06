@@ -4,12 +4,16 @@ const Hoek = require('hoek');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-
+const PLACEHOLDER = '%%PLACEHOLDER%%';
 const EXT_REGEX = new RegExp('\\.jsx$');
 const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
-    removeCache: process.env.NODE_ENV !== 'production'
+    removeCache: process.env.NODE_ENV !== 'production',
+    layout: false,
+    layoutPath: '',
+    layoutKeyword: 'children',
+    layoutRenderMethod: 'renderToStaticMarkup'
 };
 
 
@@ -25,17 +29,33 @@ const compile = function compile(template, compileOpts) {
         // support es6 default export semantics
         Component = Component.default || Component;
 
-        let Element = React.createFactory(Component);
+        let element = React.createFactory(Component);
 
         let output = renderOpts.doctype;
-        output += ReactDOMServer[renderOpts.renderMethod](Element(context));
+
+        if (renderOpts.layout) {
+            let Layout = require(renderOpts.layoutPath + renderOpts.layout);
+            Layout = Layout.default || Layout;
+
+            const layoutElement = React.createFactory(Layout);
+            const layoutContext = Hoek.applyToDefaults({}, context);
+            layoutContext[renderOpts.layoutKeyword] = PLACEHOLDER;
+
+            const layoutOutput = ReactDOMServer[renderOpts.layoutRenderMethod](layoutElement(layoutContext));
+            const elementOutput = ReactDOMServer[renderOpts.renderMethod](element(context));
+            output = layoutOutput.replace(PLACEHOLDER, elementOutput);
+
+        }
+        else {
+            output += ReactDOMServer[renderOpts.renderMethod](element(context));
+        }
 
         // transpilers tend to take a long time to start up, so we delete react
         // modules from the cache so we don't need to restart to see view
         // changes (unless we're in production silly)
         if (renderOpts.removeCache) {
             Component = undefined;
-            Element = undefined;
+            element = undefined;
 
             Object.keys(require.cache).forEach((module) => {
 
