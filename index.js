@@ -10,8 +10,8 @@ const DEFAULTS = {
 	doctype: "<!DOCTYPE html>",
 	renderMethod: "renderToStaticMarkup",
 	removeCache: process.env.NODE_ENV !== "production",
-	layout: "html.js",
-	layoutPath: `${__dirname}/components/`,
+	layout: false,
+	layoutPath: "",
 	layoutKeyword: "children",
 	layoutRenderMethod: "renderToStaticMarkup"
 };
@@ -34,6 +34,7 @@ const compile = function compile(template, compileOpts) {
 		if (renderOpts.layout) {
 			let Layout = require(renderOpts.layoutPath + renderOpts.layout);
 			Layout = Layout.default || Layout;
+
 			let layoutElement = React.createFactory(Layout);
 			let layoutContext = Hoek.applyToDefaults({}, context);
 			layoutContext[renderOpts.layoutKeyword] = PLACEHOLDER;
