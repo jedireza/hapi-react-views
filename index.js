@@ -44,7 +44,9 @@ const compile = function compile(template, compileOpts) {
             const layoutOutput = ReactDOMServer[renderOpts.layoutRenderMethod](layoutElement(layoutContext));
             const elementOutput = ReactDOMServer[renderOpts.renderMethod](element(context));
             output = layoutOutput.replace(PLACEHOLDER, elementOutput);
-        } else {
+
+        }
+        else {
             output += ReactDOMServer[renderOpts.renderMethod](element(context));
         }
 
@@ -56,6 +58,7 @@ const compile = function compile(template, compileOpts) {
             element = undefined;
 
             Object.keys(require.cache).forEach((module) => {
+
                 if (EXT_REGEX.test(module)) {
                     delete require.cache[module];
                 }
