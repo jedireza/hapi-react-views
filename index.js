@@ -1,18 +1,17 @@
 'use strict';
-
 const Hoek = require('hoek');
+const Path = require('path');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-const PLACEHOLDER = '%%PLACEHOLDER%%';
-const EXT_REGEX = new RegExp('\\.jsx$');
+
+const EXT_REGEX = /\.jsx$/;
 const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
     removeCache: process.env.NODE_ENV !== 'production',
-    layout: false,
-    layoutPath: '',
-    layoutKeyword: 'children',
+    layout: undefined,
+    layoutPath: undefined,
     layoutRenderMethod: 'renderToStaticMarkup'
 };
 
@@ -25,38 +24,36 @@ const compile = function compile(template, compileOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
-        let Component = require(compileOpts.filename);
-        // support es6 default export semantics
-        Component = Component.default || Component;
+        let View = require(compileOpts.filename);
+        // support for es6 default export semantics
+        View = View.default || View;
 
-        let element = React.createFactory(Component);
+        const ViewElement = React.createFactory(View);
 
         let output = renderOpts.doctype;
 
         if (renderOpts.layout) {
-            let Layout = require(renderOpts.layoutPath + renderOpts.layout);
+            const layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout + '.jsx');
+            let Layout = require(layoutPath);
+            // support for es6 default export semantics
             Layout = Layout.default || Layout;
 
-            const layoutElement = React.createFactory(Layout);
-            const layoutContext = Hoek.applyToDefaults({}, context);
-            layoutContext[renderOpts.layoutKeyword] = PLACEHOLDER;
+            const LayoutElement = React.createFactory(Layout);
 
-            const layoutOutput = ReactDOMServer[renderOpts.layoutRenderMethod](layoutElement(layoutContext));
-            const elementOutput = ReactDOMServer[renderOpts.renderMethod](element(context));
-            output = layoutOutput.replace(PLACEHOLDER, elementOutput);
+            const viewOutput = ReactDOMServer[renderOpts.renderMethod](ViewElement(context));
 
+            output += ReactDOMServer[renderOpts.layoutRenderMethod](LayoutElement(context, viewOutput));
         }
         else {
-            output += ReactDOMServer[renderOpts.renderMethod](element(context));
+            output += ReactDOMServer[renderOpts.renderMethod](ViewElement(context));
         }
 
-        // transpilers tend to take a long time to start up, so we delete react
-        // modules from the cache so we don't need to restart to see view
-        // changes (unless we're in production silly)
+        /*
+         * Transpilers tend to take a while to start up. Here we delete `*.jsx`
+         * modules from the require cache so we don't need to restart the app
+         * to see view changes. Skipped By default when `NODE_ENV=production`.
+         */
         if (renderOpts.removeCache) {
-            Component = undefined;
-            element = undefined;
-
             Object.keys(require.cache).forEach((module) => {
 
                 if (EXT_REGEX.test(module)) {

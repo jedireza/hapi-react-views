@@ -1,7 +1,7 @@
-var React = require('react');
+const React = require('react');
 
 
-var Component = React.createClass({
+const Component = React.createClass({
     render: function () {
 
         return (
@@ -11,7 +11,7 @@ var Component = React.createClass({
                 </head>
                 <body>
                     <div id="app-mount"
-                        dangerouslySetInnerHTML={{ __html: this.props.remount }}>
+                        dangerouslySetInnerHTML={{ __html: this.props.children }}>
                     </div>
                     <script id="app-state"
                         dangerouslySetInnerHTML={{ __html: this.props.state }}>

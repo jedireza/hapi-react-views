@@ -1,10 +1,10 @@
 'use strict';
-
-const Lab = require('lab');
 const Code = require('code');
 const Hapi = require('hapi');
-const Vision = require('vision');
 const HapiReactViews = require('../index');
+const Lab = require('lab');
+const Path = require('path');
+const Vision = require('vision');
 
 
 require('babel-core/register')({
@@ -125,6 +125,67 @@ lab.experiment('Rendering', () => {
                 Code.expect(err).to.not.exist();
                 done();
             });
+        });
+    });
+});
+
+
+lab.experiment('Layouts', () => {
+
+    let server;
+
+    lab.beforeEach((done) => {
+
+        server = new Hapi.Server(0);
+
+        server.register(Vision, (err) => {
+
+            if (err) {
+                return done(err);
+            }
+
+            server.views({
+                engines: {
+                    jsx: HapiReactViews
+                },
+                relativeTo: __dirname,
+                path: 'fixtures',
+                compileOptions: {
+                    layoutPath: Path.join(__dirname, 'fixtures'),
+                    layout: 'layout'
+                }
+            });
+
+            done();
+        });
+    });
+
+
+    lab.test('it successfully renders', (done) => {
+
+        const context = { title: 'Woot, it rendered.' };
+
+        server.render('view', context, (err, output) => {
+
+            Code.expect(err).to.not.exist();
+            done();
+        });
+    });
+
+
+    lab.test('it successfully renders with es6 export semantics', (done) => {
+
+        const context = { title: 'Woot, it rendered.' };
+        const renderOpts = {
+            runtimeOptions: {
+                layout: 'layout-es6'
+            }
+        };
+
+        server.render('view-es6', context, renderOpts, (err, output) => {
+
+            Code.expect(err).to.not.exist();
+            done();
         });
     });
 });

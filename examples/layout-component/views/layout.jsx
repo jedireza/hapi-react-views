@@ -10,7 +10,11 @@ const Component = React.createClass({
                     <title>{this.props.title}</title>
                 </head>
                 <body>
-                    <h1>Activate the plot device.</h1>
+                    {this.props.children}
+                    <hr />
+                    <p>
+                        <a href="/">Home</a> | <a href="/about">About Us</a>
+                    </p>
                 </body>
             </html>
         );

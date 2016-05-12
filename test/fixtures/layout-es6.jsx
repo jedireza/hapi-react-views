@@ -1,8 +1,9 @@
-const React = require('react');
+import React from 'react';
 
 
-const Component = React.createClass({
-    render: function () {
+class Component extends React.Component {
+
+    render () {
 
         return (
             <html>
@@ -13,15 +14,11 @@ const Component = React.createClass({
                     <div id="content"
                         dangerouslySetInnerHTML={{ __html: this.props.children }}>
                     </div>
-                    <hr />
-                    <p>
-                        <a href="/">Home</a> | <a href="/about">About Us</a>
-                    </p>
                 </body>
             </html>
         );
     }
-});
+}
 
 
-module.exports = Component;
+export default Component;

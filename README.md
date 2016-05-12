@@ -73,19 +73,22 @@ Configuring with a CLI manifest using [`visionary`][visionary]:
 
 ```json
 {
-    "servers": [{
+    "connections": [{
         "port": 8080
     }],
-    "plugins": {
-        "vision": {},
-        "visionary": {
-            "engines": {
-              "jsx": "hapi-react-views"
-            },
-            "compileOptions": {},
-            "path": "./views"
+    "registrations": [{
+        "plugin": "vision",
+        "plugin": {
+            "register": "visionary",
+            "options": {
+                "engines": {
+                  "jsx": "hapi-react-views"
+                },
+                "compileOptions": {},
+                "path": "./views"
+            }
         }
-    }
+    }]
 }
 ```
 
@@ -114,6 +117,10 @@ The following `compileOptions` will customize how `hapi-react-views` works.
     - `removeCache` - since transpilers tend to take a while to startup, we can
       remove templates from the require cache so we don't need to restart the
       server to see changes. Defaults to `'production' !== process.env.NODE_ENV`.
+    - `layout` - the name of the layout file to use.
+    - `layoutPath` - the directory path of where layouts are stored.
+    - `layoutRenderMethod` - same as `renderMethod` but used for layouts.
+      Defaults to `renderToStaticMarkup`.
 
 You're able to override all these `compileOptions` at runtime.
 
@@ -159,8 +166,10 @@ $ npm run simple-example
 
 ### Rendering with layouts
 
+#### Wrapper style layouts
+
 This example is renders simple components as HTML but adds the idea of using
-layouts. [View the code.][ex-layouts]
+wrapper layouts. [View the code.][ex-layouts]
 
 [ex-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout
 
@@ -168,10 +177,22 @@ layouts. [View the code.][ex-layouts]
 $ npm run layout-example
 ```
 
+#### Component style layouts
+
+This example is renders simple components as HTML but adds the idea of using
+component layouts. [View the code.][ex-comp-layouts]
+
+[ex-comp-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout-component
+
+```bash
+$ npm run layout-componenet-example
+```
+
 ### Remounting on the client (universal/isomorphic)
 
 This example demonstrates the idea of remounting client side in order to create
-universal/isomorphic applications. [View the code.][ex-remount]
+universal/isomorphic applications. It also uses the wrapper layout feature so
+the main view can be remounted on the client. [View the code.][ex-remount]
 
 [ex-remount]: https://github.com/jedireza/hapi-react-views/tree/master/examples/remount
 
