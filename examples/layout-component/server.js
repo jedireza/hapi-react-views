@@ -34,6 +34,15 @@ server.register(Vision, (err) => {
         }
     });
 
+    server.route({
+        method: 'GET',
+        path: '/about',
+        handler: (request, reply) => {
+
+            reply.view('about');
+        }
+    });
+
     server.start((err) => {
 
         if (err) {

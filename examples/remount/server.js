@@ -1,5 +1,4 @@
 'use strict';
-
 const Path = require('path');
 const Hapi = require('hapi');
 const Inert = require('inert');
@@ -25,7 +24,12 @@ server.register([Inert, Vision], (err) => {
             jsx: HapiReactViews
         },
         relativeTo: __dirname,
-        path: 'components'
+        path: 'components',
+        compileOptions: {
+            renderMethod: 'renderToString',
+            layoutPath: Path.join(__dirname, 'components'),
+            layout: 'html'
+        }
     });
 
     server.route({
@@ -41,35 +45,10 @@ server.register([Inert, Vision], (err) => {
         path: '/',
         handler: (request, reply) => {
 
-            const appContext = {
-                foo: 'baz'
-            };
-            const renderOpts = {
-                runtimeOptions: {
-                    renderMethod: 'renderToString'
-                }
-            };
+            const context = { foo: 'baz' };
+            context.state = 'window.state = ' + JSON.stringify(context) + ';';
 
-            server.render('app', appContext, renderOpts, (err, appOutput) => {
-
-                if (err) {
-                    return reply(err);
-                }
-
-                const htmlContext = {
-                    remount: appOutput,
-                    state: 'window.state = ' + JSON.stringify(appContext) + ';'
-                };
-
-                server.render('html', htmlContext, (err, htmlOutput) => {
-
-                    if (err) {
-                        return reply(err);
-                    }
-
-                    reply(htmlOutput);
-                });
-            });
+            reply.view('app', context);
         }
     });
 

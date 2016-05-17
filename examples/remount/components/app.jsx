@@ -1,11 +1,17 @@
-var React = require('react');
+const React = require('react');
 
 
-var Component = React.createClass({
+const Component = React.createClass({
+    handleClick: function () {
+      alert('Hi ' + this.props.foo);
+    },
     render: function () {
 
         return (
-            <div>Foo: ({this.props.foo})</div>
+          <div>
+              <h1>Foo: ({this.props.foo})</h1>
+              <button onClick={this.handleClick}>Event test</button>
+          </div>
         );
     }
 });

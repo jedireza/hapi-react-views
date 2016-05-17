@@ -6,7 +6,9 @@ const Component = React.createClass({
     render: function () {
 
         return (
-            <h1>Welcome to the plot device.</h1>
+            <Layout title="About Page">
+                <h1>About the plot device.</h1>
+            </Layout>
         );
     }
 });

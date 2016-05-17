@@ -4,10 +4,11 @@
   "description": "A hapi view engine for React components.",
   "main": "index.js",
   "scripts": {
-    "test": "lab -c -L -I 'Reflect,core,_babelPolyfill,regeneratorRuntime,__core-js_shared__'",
-    "test-cover": "lab -c -r html -o test/artifacts/coverage.html && open test/artifacts/coverage.html",
+    "test": "lab -t 100 -c -L -I 'Reflect,core,_babelPolyfill,regeneratorRuntime,__core-js_shared__'",
+    "test-cover": "lab -t 100 -c -r html -o test/artifacts/coverage.html && open test/artifacts/coverage.html",
     "simple-example": "node examples/simple/server",
     "layout-example": "node examples/layout/server",
+    "layout-component-example": "node examples/layout-component/server",
     "remount-example": "webpack --config examples/remount/webpack.js && node examples/remount/server"
   },
   "repository": {
@@ -28,7 +29,7 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "hoek": "3.x.x"
+    "hoek": "4.x.x"
   },
   "peerDependencies": {
     "react": "15.x.x",
@@ -42,7 +43,7 @@
     "babel-preset-react": "6.x.x",
     "code": "2.x.x",
     "hapi": "13.x.x",
-    "inert": "3.x.x",
+    "inert": "4.x.x",
     "lab": "10.x.x",
     "react": "15.x.x",
     "react-dom": "15.x.x",

@@ -10,7 +10,9 @@ const Component = React.createClass({
                     <title>{this.props.title}</title>
                 </head>
                 <body>
-                    <h1>Activate the plot device.</h1>
+                    <div id="content"
+                        dangerouslySetInnerHTML={{ __html: this.props.children }}>
+                    </div>
                 </body>
             </html>
         );

@@ -1,6 +1,6 @@
 'use strict';
-
 const Hapi = require('hapi');
+const Path = require('path');
 const Vision = require('vision');
 const HapiReactViews = require('../..');
 
@@ -23,7 +23,11 @@ server.register(Vision, (err) => {
             jsx: HapiReactViews
         },
         relativeTo: __dirname,
-        path: 'views'
+        path: 'views',
+        compileOptions: {
+            layoutPath: Path.join(__dirname, 'views'),
+            layout: 'layout'
+        }
     });
 
     server.route({
@@ -31,7 +35,7 @@ server.register(Vision, (err) => {
         path: '/',
         handler: (request, reply) => {
 
-            reply.view('home');
+            reply.view('home', { title: 'Home Page' });
         }
     });
 
@@ -40,7 +44,7 @@ server.register(Vision, (err) => {
         path: '/about',
         handler: (request, reply) => {
 
-            reply.view('about');
+            reply.view('about', { title: 'About Page' });
         }
     });
 
