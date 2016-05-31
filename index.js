@@ -33,7 +33,7 @@ const compile = function compile(template, compileOpts) {
         let output = renderOpts.doctype;
 
         if (renderOpts.layout) {
-            const layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout + '.jsx');
+            const layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout);
             let Layout = require(layoutPath);
             // support for es6 default export semantics
             Layout = Layout.default || Layout;
