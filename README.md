@@ -116,8 +116,8 @@ The following `compileOptions` will customize how `hapi-react-views` works.
       Defaults to `renderToStaticMarkup`.
     - `removeCache` - since transpilers tend to take a while to startup, we can
       remove templates from the require cache so we don't need to restart the
-      server to see changes. Note: this only works if your files use the `.jsx`
-      extension. Defaults to `'production' !== process.env.NODE_ENV`. 
+      server to see changes.
+      Defaults to `'production' !== process.env.NODE_ENV`. 
     - `layout` - the name of the layout file to use.
     - `layoutPath` - the directory path of where layouts are stored.
     - `layoutRenderMethod` - same as `renderMethod` but used for layouts.
