@@ -23,7 +23,7 @@ const compile = function compile(template, compileOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
-        let View = require(compileOpts.filename);
+        let View = require(renderOpts.filename);
         // support for es6 default export semantics
         View = View.default || View;
 
@@ -61,12 +61,9 @@ const compile = function compile(template, compileOpts) {
                 const layoutModule = require.resolve(layoutPath);
                 delete require.cache[layoutModule];
             }
-            Object.keys(require.cache).forEach((module) => {
 
-                if (module === compileOpts.filename) {
-                    delete require.cache[module];
-                }
-            });
+            const module = require.resolve(renderOpts.filename);
+            delete require.cache[module];
         }
 
         return output;
