@@ -5,7 +5,6 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
 
-const EXT_REGEX = /\.jsx$/;
 const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
@@ -24,7 +23,7 @@ const compile = function compile(template, compileOpts) {
 
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
-        let View = require(compileOpts.filename);
+        let View = require(renderOpts.filename);
         // support for es6 default export semantics
         View = View.default || View;
 
@@ -32,8 +31,10 @@ const compile = function compile(template, compileOpts) {
 
         let output = renderOpts.doctype;
 
+        let layoutPath;
+
         if (renderOpts.layout) {
-            const layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout);
+            layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout);
             let Layout = require(layoutPath);
             // support for es6 default export semantics
             Layout = Layout.default || Layout;
@@ -49,17 +50,20 @@ const compile = function compile(template, compileOpts) {
         }
 
         /*
-         * Transpilers tend to take a while to start up. Here we delete `*.jsx`
-         * modules from the require cache so we don't need to restart the app
-         * to see view changes. Skipped By default when `NODE_ENV=production`.
+         * Transpilers tend to take a while to start up. Here we delete the
+         * view and layout modules from the require cache so we don't need to
+         * restart the app to see view changes. Skipped By default when
+         * `NODE_ENV=production`.
          */
         if (renderOpts.removeCache) {
-            Object.keys(require.cache).forEach((module) => {
 
-                if (EXT_REGEX.test(module)) {
-                    delete require.cache[module];
-                }
-            });
+            if (renderOpts.layout) {
+                const layoutModule = require.resolve(layoutPath);
+                delete require.cache[layoutModule];
+            }
+
+            const module = require.resolve(renderOpts.filename);
+            delete require.cache[module];
         }
 
         return output;
