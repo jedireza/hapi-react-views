@@ -72,5 +72,5 @@ const compile = function compile(template, compileOpts) {
 
 
 module.exports = {
-    compile: compile
+    compile
 };
