@@ -117,7 +117,9 @@ The following `compileOptions` will customize how `hapi-react-views` works.
     - `removeCache` - since transpilers tend to take a while to startup, we can
       remove templates from the require cache so we don't need to restart the
       server to see changes. Defaults to `'production' !==
-      process.env.NODE_ENV`. 
+      process.env.NODE_ENV`.
+    - `removeCacheRegExp` - a `RegExp` pattern string, matching modules in
+      require cache will be removed. Defaults to `undefined`.
     - `layout` - the name of the layout file to use.
     - `layoutPath` - the directory path of where layouts are stored.
     - `layoutRenderMethod` - same as `renderMethod` but used for layouts.

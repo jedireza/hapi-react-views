@@ -9,6 +9,7 @@ const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
     renderMethod: 'renderToStaticMarkup',
     removeCache: process.env.NODE_ENV !== 'production',
+    removeCacheRegExp: undefined,
     layout: undefined,
     layoutPath: undefined,
     layoutRenderMethod: 'renderToStaticMarkup'
@@ -51,19 +52,29 @@ const compile = function compile(template, compileOpts) {
 
         /*
          * Transpilers tend to take a while to start up. Here we delete the
-         * view and layout modules from the require cache so we don't need to
-         * restart the app to see view changes. Skipped By default when
-         * `NODE_ENV=production`.
+         * view and layout modules (and any modules matching the
+         * `removeCacheRegExp` pattern) from the require cache so we don't need
+         * to restart the app to see view changes.
          */
         if (renderOpts.removeCache) {
-
             if (renderOpts.layout) {
-                const layoutModule = require.resolve(layoutPath);
-                delete require.cache[layoutModule];
+                const layoutKey = require.resolve(layoutPath);
+                delete require.cache[layoutKey];
             }
 
-            const module = require.resolve(renderOpts.filename);
-            delete require.cache[module];
+            const viewKey = require.resolve(renderOpts.filename);
+            delete require.cache[viewKey];
+
+            if (renderOpts.removeCacheRegExp) {
+                const regexp = new RegExp(renderOpts.removeCacheRegExp);
+
+                Object.keys(require.cache).forEach((cacheKey) => {
+
+                    if (regexp.test(cacheKey)) {
+                        delete require.cache[cacheKey];
+                    }
+                });
+            }
         }
 
         return output;

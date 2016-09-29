@@ -127,6 +127,28 @@ lab.experiment('Rendering', () => {
             });
         });
     });
+
+
+    lab.test('it demonstrates removing matching modules from the require cache', (done) => {
+
+        const context = { title: 'Woot, it rendered.' };
+        const renderOpts = {
+            runtimeOptions: {
+                removeCacheRegExp: 'navbar'
+            }
+        };
+
+        server.render('view', context, renderOpts, (err, output) => {
+
+            Code.expect(err).to.not.exist();
+
+            server.render('view', context, renderOpts, (err, out) => {
+
+                Code.expect(err).to.not.exist();
+                done();
+            });
+        });
+    });
 });
 
 
