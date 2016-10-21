@@ -188,7 +188,7 @@ component layouts. [View the code.][ex-comp-layouts]
 [ex-comp-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout-component
 
 ```bash
-$ npm run layout-componenet-example
+$ npm run layout-component-example
 ```
 
 ### Remounting on the client (universal/isomorphic)
