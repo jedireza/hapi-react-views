@@ -2,14 +2,14 @@
 
 A hapi view engine for React components.
 
-[![Build Status](https://travis-ci.org/jedireza/hapi-react-views.svg?branch=master)](https://travis-ci.org/jedireza/hapi-react-views)
-[![Dependency Status](https://david-dm.org/jedireza/hapi-react-views.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views)
-[![Peer Dependency Status](https://david-dm.org/jedireza/hapi-react-views/peer-status.svg?style=flat)](https://david-dm.org/jedireza/hapi-react-views#info=peerDependencies)
-[![Dev Dependency Status](https://david-dm.org/jedireza/hapi-react-views/dev-status.svg?theme=shields.io)](https://david-dm.org/jedireza/hapi-react-views#info=devDependencies)
+[![Build Status](https://img.shields.io/travis/jedireza/hapi-react-views.svg)](https://travis-ci.org/jedireza/hapi-react-views)
+[![Dependency Status](https://img.shields.io/david/jedireza/hapi-react-views.svg)](https://david-dm.org/jedireza/hapi-react-views)
+[![Peer Dependency Status](https://img.shields.io/david/peer/jedireza/hapi-react-views.svg)](https://david-dm.org/jedireza/hapi-react-views?type=peer)
+[![Dev Dependency Status](https://img.shields.io/david/dev/jedireza/hapi-react-views.svg)](https://david-dm.org/jedireza/hapi-react-views?type=dev)
 
-By default, we render static markup using `renderToStaticMarkup`. We can also
-choose to use `renderToString`, preserving the `data-react-id` attributes so
-re-mounting client side is possible.
+By default rendering is done using `ReactDOMServer.renderToStaticMarkup`. You
+can also choose to use `ReactDOMServer.renderToString`, preserving the
+`data-react-id` attributes so re-mounting client side is possible.
 
 
 ## Install
@@ -23,19 +23,6 @@ installed. We depend on these via `peerDependencies`.
 
 
 ## Usage
-
-Note: As of `hapi-react-views` v4.x your project must register a transpiler
-such as [`babel`][babel] or [`node-jsx`][node-jsx]. An alternative to this is
-to transpile ahead of time and save the result to file.
-
-[babel]: https://github.com/babel/babel
-[node-jsx]: https://github.com/petehunt/node-jsx
-
-Note: As of `hapi` v9.x, your project must register the [`vision`][vision]
-plugin in order for the `server.views()` and `server.render()` methods to be
-available.
-
-[vision]: https://github.com/hapijs/vision
 
 Configuring the server manually:
 
@@ -92,6 +79,19 @@ Configuring with a CLI manifest using [`visionary`][visionary]:
 }
 ```
 
+Note: As of `hapi-react-views` v4.x your project must register a transpiler
+such as [`babel`][babel] or [`node-jsx`][node-jsx]. An alternative to this is
+to transpile ahead of time and save the result to file.
+
+[babel]: https://github.com/babel/babel
+[node-jsx]: https://github.com/petehunt/node-jsx
+
+Note: As of `hapi` v9.x, your project must register the [`vision`][vision]
+plugin in order for the `server.views()` and `server.render()` methods to be
+available.
+
+[vision]: https://github.com/hapijs/vision
+
 
 ## API
 
@@ -107,25 +107,24 @@ passing `options` to `server.views`.
 
 The following `compileOptions` will customize how `hapi-react-views` works.
 
-  - `compileOptions` - options object passed to the engine's compile function.
-    Defaults to `{}`.
-    - `doctype` - a simple string prepended to the response. Defaults to
-      `<!DOCTYPE html>`
-    - `renderMethod` - the method to invoke on `React` to generate our output.
-      Available options are `renderToStaticMarkup` and `renderToString`.
-      Defaults to `renderToStaticMarkup`.
-    - `removeCache` - since transpilers tend to take a while to startup, we can
-      remove templates from the require cache so we don't need to restart the
-      server to see changes. Defaults to `'production' !==
-      process.env.NODE_ENV`.
-    - `removeCacheRegExp` - a `RegExp` pattern string, matching modules in
-      require cache will be removed. Defaults to `undefined`.
-    - `layout` - the name of the layout file to use.
-    - `layoutPath` - the directory path of where layouts are stored.
-    - `layoutRenderMethod` - same as `renderMethod` but used for layouts.
-      Defaults to `renderToStaticMarkup`.
+- `compileOptions` - options object passed to the engine's compile function.
+  Defaults to `{}`.
+  - `doctype` - a simple string prepended to the response. Defaults to
+    `<!DOCTYPE html>`
+  - `renderMethod` - the method to invoke on `ReactDOMServer` to generate our
+    output. Available options are `renderToStaticMarkup` and `renderToString`.
+    Defaults to `renderToStaticMarkup`.
+  - `removeCache` - since transpilers tend to take a while to startup, we can
+    remove templates from the require cache so we don't need to restart the
+    server to see changes. Defaults to `'production' !== process.env.NODE_ENV`.
+  - `removeCacheRegExp` - a `RegExp` pattern string, matching modules in
+    require cache will be removed. Defaults to `undefined`.
+  - `layout` - the name of the layout file to use.
+  - `layoutPath` - the directory path of where layouts are stored.
+  - `layoutRenderMethod` - same as `renderMethod` but used for layouts.
+    Defaults to `renderToStaticMarkup`.
 
-You're able to override all these `compileOptions` at runtime.
+You can override all these `compileOptions` at runtime.
 
 ```js
 const context = { name: 'Steve' };
@@ -148,7 +147,8 @@ server.render('template', context, renderOpts, (err, output) => {
 
 ## Examples
 
-Before you can run the examples, you need to clone this repo and install the dependencies.
+Before you can run the examples, you need to clone this repo and install the
+dependencies.
 
 ```bash
 $ git clone git@github.com:jedireza/hapi-react-views.git
@@ -158,8 +158,7 @@ $ npm install
 
 ### Rendering a simple page
 
-This example renders a simple component as HTML output. [View the
-code.][ex-simple]
+This example renders a component as HTML output. [View the code.][ex-simple]
 
 [ex-simple]: https://github.com/jedireza/hapi-react-views/tree/master/examples/simple
 
@@ -171,8 +170,10 @@ $ npm run simple-example
 
 #### Wrapper style layouts
 
-This example is renders simple components as HTML but adds the idea of using
-wrapper layouts. [View the code.][ex-layouts]
+This example renders components as HTML adding the idea of using wrapper
+layouts. The wrapping is handled by this module, so it may feel like a bit of
+magic since there is no direct dependency to the layout in your component
+views. [View the code.][ex-layouts]
 
 [ex-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout
 
@@ -182,8 +183,9 @@ $ npm run layout-example
 
 #### Component style layouts
 
-This example is renders simple components as HTML but adds the idea of using
-component layouts. [View the code.][ex-comp-layouts]
+This example renders components as HTML but adds the idea of using component
+layouts. The component layout is a direct dependency of your view components
+with no magic handling by this module. [View the code.][ex-comp-layouts]
 
 [ex-comp-layouts]: https://github.com/jedireza/hapi-react-views/tree/master/examples/layout-component
 
@@ -193,9 +195,13 @@ $ npm run layout-component-example
 
 ### Remounting on the client (universal/isomorphic)
 
-This example demonstrates the idea of remounting client side in order to create
-universal/isomorphic applications. It also uses the wrapper layout feature so
-the main view can be remounted on the client. [View the code.][ex-remount]
+This example demonstrates the idea of rendering the full page on the server and
+remounting the app view on the client side as a way to to create universal (aka
+isomorphic) applications.
+
+It uses the wrapper layout feature, making it easy for the layout to be
+rendered without `data-react-id` attributes and the app view to be rendered
+with them. [View the code.][ex-remount]
 
 [ex-remount]: https://github.com/jedireza/hapi-react-views/tree/master/examples/remount
 

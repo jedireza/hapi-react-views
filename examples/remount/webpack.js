@@ -5,13 +5,14 @@ const Path = require('path');
 module.exports = {
     entry: Path.join(__dirname, './client.js'),
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     output: {
-        filename: Path.join(__dirname, './assets/client.js')
+        path: Path.resolve(__dirname),
+        filename: './assets/client.js'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.jsx$/,
             loader: 'babel-loader',
             query: {

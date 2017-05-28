@@ -2,8 +2,8 @@ const React = require('react');
 const Navbar = require('./navbar.jsx');
 
 
-const Component = React.createClass({
-    render: function () {
+class Component extends React.Component {
+    render () {
 
         return (
             <div>
@@ -12,7 +12,7 @@ const Component = React.createClass({
             </div>
         );
     }
-});
+}
 
 
 module.exports = Component;
