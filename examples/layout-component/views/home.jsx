@@ -2,8 +2,8 @@ const React = require('react');
 const Layout = require('./layout.jsx');
 
 
-const Component = React.createClass({
-    render: function () {
+class HomeView extends React.Component {
+    render () {
 
         return (
             <Layout title="Home Page">
@@ -11,7 +11,7 @@ const Component = React.createClass({
             </Layout>
         );
     }
-});
+}
 
 
-module.exports = Component;
+module.exports = HomeView;

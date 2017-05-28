@@ -1,8 +1,8 @@
 const React = require('react');
 
 
-const Component = React.createClass({
-    render: function () {
+class Html extends React.Component {
+    render () {
 
         return (
             <html>
@@ -21,7 +21,7 @@ const Component = React.createClass({
             </html>
         );
     }
-});
+}
 
 
-module.exports = Component;
+module.exports = Html;

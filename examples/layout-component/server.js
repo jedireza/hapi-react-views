@@ -10,7 +10,7 @@ require('babel-core/register')({
 
 
 const server = new Hapi.Server();
-server.connection();
+server.connection({ port: process.env.PORT });
 server.register(Vision, (err) => {
 
     if (err) {
