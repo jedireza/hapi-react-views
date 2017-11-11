@@ -12,7 +12,7 @@ require('babel-core/register')({
 
 const main = async function () {
 
-    const server = new Hapi.Server({
+    const server = Hapi.Server({
         port: process.env.PORT
     });
 

@@ -30,7 +30,7 @@ lab.experiment('Rendering', () => {
 
     lab.beforeEach(async () => {
 
-        server = new Hapi.Server();
+        server = Hapi.Server();
 
         await server.register(Vision);
 
@@ -134,7 +134,7 @@ lab.experiment('Layouts', () => {
 
     lab.beforeEach(async () => {
 
-        server = new Hapi.Server();
+        server = Hapi.Server();
 
         await server.register(Vision);
 

@@ -36,7 +36,7 @@ require('babel-core/register')({
 });
 
 const main = async function () {
-    const server = new Hapi.Server();
+    const server = Hapi.Server();
 
     await server.register(Vision);
 
