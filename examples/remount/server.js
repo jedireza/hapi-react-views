@@ -7,17 +7,17 @@ const HapiReactViews = require('../..');
 
 
 require('babel-core/register')({
-    presets: ['react', 'es2015']
+    presets: ['react', 'env']
 });
 
 
-const server = new Hapi.Server();
-server.connection({ port: process.env.PORT });
-server.register([Inert, Vision], (err) => {
+const main = async function () {
 
-    if (err) {
-        console.log('Failed to load plugins.');
-    }
+    const server = new Hapi.Server({
+        port: process.env.PORT
+    });
+
+    await server.register([Inert, Vision]);
 
     server.views({
         engines: {
@@ -43,21 +43,18 @@ server.register([Inert, Vision], (err) => {
     server.route({
         method: 'GET',
         path: '/',
-        handler: (request, reply) => {
+        handler: (request, h) => {
 
             const context = { foo: 'baz' };
-            context.state = 'window.state = ' + JSON.stringify(context) + ';';
+            context.state = `window.state = ${JSON.stringify(context)};`;
 
-            reply.view('app', context);
+            return h.view('app', context);
         }
     });
 
-    server.start((err) => {
+    await server.start();
 
-        if (err) {
-            throw err;
-        }
+    console.log(`Server is listening at ${server.info.uri}`);
+};
 
-        console.log('Server is listening at ' + server.info.uri);
-    });
-});
+main();

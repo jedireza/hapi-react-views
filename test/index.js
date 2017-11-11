@@ -1,5 +1,4 @@
 'use strict';
-const Code = require('code');
 const Hapi = require('hapi');
 const HapiReactViews = require('../index');
 const Lab = require('lab');
@@ -8,7 +7,7 @@ const Vision = require('vision');
 
 
 require('babel-core/register')({
-    presets: ['react', 'es2015']
+    presets: ['react', 'env']
 });
 
 
@@ -17,11 +16,10 @@ const lab = exports.lab = Lab.script();
 
 lab.experiment('Engine', () => {
 
-    lab.test('it is an object with a compile method', (done) => {
+    lab.test('it is an object with a compile method', () => {
 
-        Code.expect(HapiReactViews).to.be.an.object();
-        Code.expect(HapiReactViews.compile).to.be.a.function();
-        done();
+        lab.expect(HapiReactViews).to.be.an.object();
+        lab.expect(HapiReactViews.compile).to.be.a.function();
     });
 });
 
@@ -30,68 +28,62 @@ lab.experiment('Rendering', () => {
 
     let server;
 
-    lab.beforeEach((done) => {
+    lab.beforeEach(async () => {
 
-        server = new Hapi.Server(0);
+        server = new Hapi.Server();
 
-        server.register(Vision, (err) => {
+        await server.register(Vision);
 
-            if (err) {
-                return done(err);
-            }
-
-            server.views({
-                engines: {
-                    jsx: HapiReactViews
-                },
-                relativeTo: __dirname,
-                path: 'fixtures'
-            });
-
-            done();
+        server.views({
+            engines: {
+                jsx: HapiReactViews
+            },
+            relativeTo: __dirname,
+            path: 'fixtures'
         });
     });
 
 
-    lab.test('it returns an error when the path misses', (done) => {
+    lab.test('it returns an error when the path misses', async () => {
 
-        const context = { title: 'Woops.' };
+        const context = {
+            title: 'Woops.'
+        };
 
-        server.render('viewz', context, (err, output) => {
-
-            Code.expect(err).to.be.an.object();
-            done();
-        });
+        try {
+            await server.render('viewz', context);
+        }
+        catch (err) {
+            lab.expect(err).to.be.an.object();
+        }
     });
 
 
-    lab.test('it successfully renders', (done) => {
+    lab.test('it successfully renders', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
 
-        server.render('view', context, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
+        await server.render('view', context);
     });
 
 
-    lab.test('it successfully renders with es6 export semantics', (done) => {
+    lab.test('it successfully renders with es6 export semantics', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
 
-        server.render('view-es6', context, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
+        await server.render('view-es6', context);
     });
 
 
-    lab.test('it successfully renders with runtime options', (done) => {
+    lab.test('it successfully renders with runtime options', async () => {
 
-        const context = { title: 'Woot, with runtime options.' };
+        const context = {
+            title: 'Woot, with runtime options.'
+        };
         const renderOpts = {
             runtimeOptions: {
                 doctype: '<!DOCTYPE html>',
@@ -99,55 +91,39 @@ lab.experiment('Rendering', () => {
             }
         };
 
-        server.render('view', context, renderOpts, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
+        await server.render('view', context, renderOpts);
     });
 
 
-    lab.test('it demonstrates keeping the require cache', (done) => {
+    lab.test('it demonstrates keeping the require cache', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
         const renderOpts = {
             runtimeOptions: {
                 removeCache: false
             }
         };
 
-        server.render('view', context, renderOpts, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-
-            server.render('view', context, renderOpts, (err, out) => {
-
-                Code.expect(err).to.not.exist();
-                done();
-            });
-        });
+        await server.render('view', context, renderOpts);
+        await server.render('view', context, renderOpts);
     });
 
 
-    lab.test('it demonstrates removing matching modules from the require cache', (done) => {
+    lab.test('it demonstrates removing matching modules from the require cache', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
         const renderOpts = {
             runtimeOptions: {
                 removeCacheRegExp: 'navbar'
             }
         };
 
-        server.render('view', context, renderOpts, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-
-            server.render('view', context, renderOpts, (err, out) => {
-
-                Code.expect(err).to.not.exist();
-                done();
-            });
-        });
+        await server.render('view', context, renderOpts);
+        await server.render('view', context, renderOpts);
     });
 });
 
@@ -156,58 +132,47 @@ lab.experiment('Layouts', () => {
 
     let server;
 
-    lab.beforeEach((done) => {
+    lab.beforeEach(async () => {
 
-        server = new Hapi.Server(0);
+        server = new Hapi.Server();
 
-        server.register(Vision, (err) => {
+        await server.register(Vision);
 
-            if (err) {
-                return done(err);
+        server.views({
+            engines: {
+                jsx: HapiReactViews
+            },
+            relativeTo: __dirname,
+            path: 'fixtures',
+            compileOptions: {
+                layoutPath: Path.join(__dirname, 'fixtures'),
+                layout: 'layout'
             }
-
-            server.views({
-                engines: {
-                    jsx: HapiReactViews
-                },
-                relativeTo: __dirname,
-                path: 'fixtures',
-                compileOptions: {
-                    layoutPath: Path.join(__dirname, 'fixtures'),
-                    layout: 'layout'
-                }
-            });
-
-            done();
         });
     });
 
 
-    lab.test('it successfully renders', (done) => {
+    lab.test('it successfully renders', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
 
-        server.render('view', context, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
+        await server.render('view', context);
     });
 
 
-    lab.test('it successfully renders with es6 export semantics', (done) => {
+    lab.test('it successfully renders with es6 export semantics', async () => {
 
-        const context = { title: 'Woot, it rendered.' };
+        const context = {
+            title: 'Woot, it rendered.'
+        };
         const renderOpts = {
             runtimeOptions: {
                 layout: 'layout-es6'
             }
         };
 
-        server.render('view-es6', context, renderOpts, (err, output) => {
-
-            Code.expect(err).to.not.exist();
-            done();
-        });
+        await server.render('view-es6', context, renderOpts);
     });
 });
