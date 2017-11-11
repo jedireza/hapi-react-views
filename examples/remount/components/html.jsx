@@ -1,3 +1,4 @@
+'use strict';
 const React = require('react');
 
 
@@ -11,12 +12,12 @@ class Html extends React.Component {
                 </head>
                 <body>
                     <div id="app-mount"
-                        dangerouslySetInnerHTML={{ __html: this.props.children }}>
-                    </div>
+                        dangerouslySetInnerHTML={{ __html: this.props.children }}
+                    />
                     <script id="app-state"
-                        dangerouslySetInnerHTML={{ __html: this.props.state }}>
-                    </script>
-                    <script src="/assets/client.js"></script>
+                        dangerouslySetInnerHTML={{ __html: this.props.state }}
+                    />
+                    <script src="/assets/client.js" />
                 </body>
             </html>
         );

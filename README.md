@@ -28,20 +28,17 @@ Configuring the server manually:
 
 ```js
 const Hapi = require('hapi');
-const Vision = require('vision');
 const HapiReactViews = require('hapi-react-views');
+const Vision = require('vision');
 
 require('babel-core/register')({
-    presets: ['react', 'es2015']
+    presets: ['react', 'env']
 });
 
-const server = new Hapi.Server();
+const main = async function () {
+    const server = Hapi.Server();
 
-server.register(Vision, (err) => {
-
-    if (err) {
-        console.log('Failed to load vision.');
-    }
+    await server.register(Vision);
 
     server.views({
         engines: {
@@ -51,40 +48,20 @@ server.register(Vision, (err) => {
         relativeTo: __dirname,
         path: 'views'
     });
-});
-```
 
-Configuring with a CLI manifest using [`visionary`][visionary]:
+    await server.start();
 
-[visionary]: https://github.com/hapijs/visionary
+    console.log(`Server is listening at ${server.info.uri}`);
+};
 
-```json
-{
-    "connections": [{
-        "port": 8080
-    }],
-    "registrations": [{
-        "plugin": "vision",
-        "plugin": {
-            "register": "visionary",
-            "options": {
-                "engines": {
-                  "jsx": "hapi-react-views"
-                },
-                "compileOptions": {},
-                "path": "./views"
-            }
-        }
-    }]
-}
+main();
 ```
 
 Note: As of `hapi-react-views` v4.x your project must register a transpiler
-such as [`babel`][babel] or [`node-jsx`][node-jsx]. An alternative to this is
-to transpile ahead of time and save the result to file.
+such as [`babel`][babel]. An alternative to this is to transpile ahead of time
+and save the result to file.
 
 [babel]: https://github.com/babel/babel
-[node-jsx]: https://github.com/petehunt/node-jsx
 
 Note: As of `hapi` v9.x, your project must register the [`vision`][vision]
 plugin in order for the `server.views()` and `server.render()` methods to be
@@ -135,10 +112,7 @@ const renderOpts = {
     }
 };
 
-server.render('template', context, renderOpts, (err, output) => {
-
-    // ...
-});
+const output = await server.render('template', context, renderOpts);
 ```
 
 [Please refer to `vision`'s docs on

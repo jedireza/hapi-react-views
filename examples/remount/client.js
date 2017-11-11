@@ -1,3 +1,4 @@
+/* global window document */
 'use strict';
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -9,4 +10,4 @@ const mountNode = document.getElementById('app-mount');
 const serverState = window.state;
 
 
-ReactDOM.render(App(serverState), mountNode);
+ReactDOM.hydrate(App(serverState), mountNode);

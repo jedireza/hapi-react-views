@@ -1,3 +1,4 @@
+'use strict';
 const React = require('react');
 const Navbar = require('./navbar.jsx');
 
