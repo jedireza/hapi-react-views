@@ -125,7 +125,7 @@ Before you can run the examples, you need to clone this repo and install the
 dependencies.
 
 ```bash
-$ git clone git@github.com:jedireza/hapi-react-views.git
+$ git clone https://github.com/jedireza/hapi-react-views.git
 $ cd hapi-react-views
 $ npm install
 ```
