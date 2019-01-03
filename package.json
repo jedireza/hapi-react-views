@@ -31,8 +31,8 @@
     "hoek": "5.x.x"
   },
   "peerDependencies": {
-    "react": ">=15",
-    "react-dom": ">=15"
+    "react": "15.x.x || 16.x.x",
+    "react-dom": "15.x.x || 16.x.x"
   },
   "devDependencies": {
     "babel-cli": "6.x.x",
