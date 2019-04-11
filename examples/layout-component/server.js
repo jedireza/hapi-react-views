@@ -1,4 +1,5 @@
 'use strict';
+
 const Hapi = require('hapi');
 const Vision = require('vision');
 const HapiReactViews = require('../..');

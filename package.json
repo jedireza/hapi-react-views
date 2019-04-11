@@ -4,7 +4,7 @@
   "description": "A hapi view engine for React components.",
   "main": "index.js",
   "scripts": {
-    "test": "lab -c -L --assert code -I '__core-js_shared__'",
+    "test": "lab -c -L --assert @hapi/code -I '__core-js_shared__'",
     "simple-example": "node examples/simple/server",
     "layout-example": "node examples/layout/server",
     "layout-component-example": "node examples/layout-component/server",
@@ -28,25 +28,25 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "hoek": "5.x.x"
+    "@hapi/hoek": "6.x.x"
   },
   "peerDependencies": {
     "react": "16.x.x",
     "react-dom": "16.x.x "
   },
   "devDependencies": {
+    "@hapi/code": "5.x.x",
+    "@hapi/hapi": "18.x.x",
+    "@hapi/inert": "5.x.x",
+    "@hapi/lab": "18.x.x",
+    "@hapi/vision": "5.x.x",
     "babel-cli": "6.x.x",
     "babel-core": "6.x.x",
     "babel-loader": "7.x.x",
     "babel-preset-env": "1.x.x",
     "babel-preset-react": "6.x.x",
-    "code": "5.x.x",
-    "hapi": "17.x.x",
-    "inert": "5.x.x",
-    "lab": "15.x.x",
     "react": "16.x.x",
     "react-dom": "16.x.x",
-    "vision": "5.x.x",
     "webpack": "3.x.x"
   }
 }

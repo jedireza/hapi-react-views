@@ -1,5 +1,6 @@
 'use strict';
-const Hoek = require('hoek');
+
+const Hoek = require('@hapi/hoek');
 const Path = require('path');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
@@ -25,6 +26,7 @@ const compile = function compile(template, compileOpts) {
         renderOpts = Hoek.applyToDefaults(compileOpts, renderOpts);
 
         let View = require(renderOpts.filename);
+
         // support for es6 default export semantics
         View = View.default || View;
 
@@ -37,6 +39,7 @@ const compile = function compile(template, compileOpts) {
         if (renderOpts.layout) {
             layoutPath = Path.join(renderOpts.layoutPath, renderOpts.layout);
             let Layout = require(layoutPath);
+
             // support for es6 default export semantics
             Layout = Layout.default || Layout;
 
