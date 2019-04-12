@@ -27,9 +27,9 @@ installed. We depend on these via `peerDependencies`.
 Configuring the server manually:
 
 ```js
-const Hapi = require('hapi');
+const Hapi = require('@hapi/hapi');
 const HapiReactViews = require('hapi-react-views');
-const Vision = require('vision');
+const Vision = require('@hapi/vision');
 
 require('babel-core/register')({
     presets: ['react', 'env']

@@ -1,7 +1,8 @@
 'use strict';
-const Hapi = require('hapi');
+
+const Hapi = require('@hapi/hapi');
 const Path = require('path');
-const Vision = require('vision');
+const Vision = require('@hapi/vision');
 const HapiReactViews = require('../..');
 
 

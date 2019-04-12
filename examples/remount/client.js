@@ -1,5 +1,6 @@
 /* global window document */
 'use strict';
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 const AppComponent = require('./components/app.jsx');

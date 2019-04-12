@@ -1,9 +1,10 @@
 'use strict';
-const Hapi = require('hapi');
+
+const Hapi = require('@hapi/hapi');
 const HapiReactViews = require('../index');
-const Lab = require('lab');
+const Lab = require('@hapi/lab');
 const Path = require('path');
-const Vision = require('vision');
+const Vision = require('@hapi/vision');
 
 
 require('babel-core/register')({
