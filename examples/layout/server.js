@@ -6,8 +6,8 @@ const Vision = require('@hapi/vision');
 const HapiReactViews = require('../..');
 
 
-require('babel-core/register')({
-    presets: ['react', 'env']
+require('@babel/register')({
+    presets: ['@babel/preset-react', '@babel/preset-env']
 });
 
 
