@@ -28,25 +28,27 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "@hapi/hoek": "6.x.x"
+    "@hapi/hoek": "8.x.x"
   },
   "peerDependencies": {
     "react": "16.x.x",
     "react-dom": "16.x.x "
   },
   "devDependencies": {
-    "@hapi/code": "5.x.x",
+    "@babel/cli": "7.x.x",
+    "@babel/core": "7.x.x",
+    "@babel/preset-env": "7.x.x",
+    "@babel/preset-react": "7.x.x",
+    "@babel/register": "7.x.x",
+    "@hapi/code": "6.x.x",
     "@hapi/hapi": "18.x.x",
     "@hapi/inert": "5.x.x",
-    "@hapi/lab": "18.x.x",
+    "@hapi/lab": "20.x.x",
     "@hapi/vision": "5.x.x",
-    "babel-cli": "6.x.x",
-    "babel-core": "6.x.x",
-    "babel-loader": "7.x.x",
-    "babel-preset-env": "1.x.x",
-    "babel-preset-react": "6.x.x",
+    "babel-loader": "8.x.x",
     "react": "16.x.x",
     "react-dom": "16.x.x",
-    "webpack": "3.x.x"
+    "webpack": "4.x.x",
+    "webpack-cli": "3.x.x"
   }
 }

@@ -17,7 +17,7 @@ module.exports = {
             test: /\.jsx$/,
             loader: 'babel-loader',
             query: {
-                presets: ['react', 'env']
+                presets: ['@babel/preset-react', '@babel/preset-env']
             }
         }]
     }

@@ -7,8 +7,8 @@ const Path = require('path');
 const Vision = require('@hapi/vision');
 
 
-require('babel-core/register')({
-    presets: ['react', 'env']
+require('@babel/register')({
+    presets: ['@babel/preset-react', '@babel/preset-env']
 });
 
 
