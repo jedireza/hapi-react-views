@@ -2,15 +2,15 @@
 
 import React from 'react'
 
-const LayoutView = () => 
+const LayoutView = ({title, children}) => 
     (
         <html>
             <head>
-                <title>{this.props.title}</title>
+                <title>{title}</title>
             </head>
             <body>
                 <div id="content"
-                    dangerouslySetInnerHTML={{ __html: this.props.children }}>
+                    dangerouslySetInnerHTML={{ __html: children }}>
                 </div>
                 <hr />
                 <p>

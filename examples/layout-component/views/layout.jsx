@@ -3,16 +3,13 @@
 import React from 'react'
 
 
-class LayoutView extends React.Component {
-    render () {
-
-        return (
+const LayoutView = ({title, children}) => (
             <html>
                 <head>
-                    <title>{this.props.title}</title>
+                    <title>{title}</title>
                 </head>
                 <body>
-                    {this.props.children}
+                    {children}
                     <hr />
                     <p>
                         <a href="/">Home</a> | <a href="/about">About Us</a>
@@ -20,8 +17,6 @@ class LayoutView extends React.Component {
                 </body>
             </html>
         );
-    }
-}
 
 
-module.exports = LayoutView;
+export default LayoutView;

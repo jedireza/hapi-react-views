@@ -1,29 +1,24 @@
 'use strict';
 
-import React from 'react'
+import React from 'react';
 
 
-class Html extends React.Component {
-    render () {
-
-        return (
-            <html>
-                <head>
-                    <title>Remount Example</title>
-                </head>
-                <body>
-                    <div id="app-mount"
-                        dangerouslySetInnerHTML={{ __html: this.props.children }}
-                    />
-                    <script id="app-state"
-                        dangerouslySetInnerHTML={{ __html: this.props.state }}
-                    />
-                    <script src="/assets/client.js" />
-                </body>
-            </html>
-        );
-    }
-}
+const Html = ({children, state}) => (
+    <html>
+        <head>
+            <title>Remount Example</title>
+        </head>
+        <body>
+            <div id="app-mount"
+                dangerouslySetInnerHTML={{ __html: children }}
+            />
+            <script id="app-state"
+                dangerouslySetInnerHTML={{ __html: state }}
+            />
+            <script src="/assets/client.js" />
+        </body>
+    </html>
+);
 
 
-module.exports = Html;
+export default Html;

@@ -3,23 +3,18 @@
 import React from 'react'
 
 
-class Component extends React.Component {
-    render () {
-
-        return (
+const Component = ({title, children}) =>
+    (
             <html>
                 <head>
-                    <title>{this.props.title}</title>
+                    <title>{title}</title>
                 </head>
                 <body>
                     <div id="content"
-                        dangerouslySetInnerHTML={{ __html: this.props.children }}>
+                        dangerouslySetInnerHTML={{ __html: children }}>
                     </div>
                 </body>
             </html>
         );
-    }
-}
 
-
-module.exports = Component;
+export default Component;

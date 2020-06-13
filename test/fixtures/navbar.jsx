@@ -3,14 +3,9 @@
 import React from 'react'
 
 
-class Component extends React.Component {
-    render () {
-
-        return (
-            <div>Navbar</div>
-        );
-    }
-}
+const Navbar = () => (
+    <div>Navbar</div>
+);
 
 
-module.exports = Component;
+export default Navbar;

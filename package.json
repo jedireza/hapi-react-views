@@ -28,7 +28,10 @@
   },
   "homepage": "https://github.com/jedireza/hapi-react-views",
   "dependencies": {
-    "@hapi/hoek": "8.x.x"
+    "@hapi/hoek": "8.x.x",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-react": "^7.20.0"
   },
   "peerDependencies": {
     "react": "16.x.x",

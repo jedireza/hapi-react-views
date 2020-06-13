@@ -1,12 +1,11 @@
-/* global window document */
+// global window document
 'use strict';
 
-import React from 'react'
-const ReactDOM = require('react-dom');
-const AppComponent = require('./components/app.jsx');
+import ReactDOM from 'react-dom'
+import AppComponent from './components/app';
 
 
-const App = React.createFactory(AppComponent);
+const App = AppComponent;
 const mountNode = document.getElementById('app-mount');
 const serverState = window.state;
 

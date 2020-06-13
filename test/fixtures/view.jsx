@@ -14,4 +14,4 @@ const Component = ()=>
     );
 
 
-module.exports = Component;
+export default Component;
