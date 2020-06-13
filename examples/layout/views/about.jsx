@@ -1,16 +1,10 @@
 'use strict';
 
-const React = require('react');
+import React from 'react';
+
+const AboutView = () => 
+    
+(<h1>About the plot device.</h1>)
 
 
-class AboutView extends React.Component {
-    render () {
-
-        return (
-            <h1>About the plot device.</h1>
-        );
-    }
-}
-
-
-module.exports = AboutView;
+export default AboutView;

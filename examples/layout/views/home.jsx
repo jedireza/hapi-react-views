@@ -1,16 +1,9 @@
 'use strict';
 
-const React = require('react');
+import React from 'react'
 
+const HomeView = () => 
+    (<h1>Welcome to the plot device.</h1>)
 
-class HomeView extends React.Component {
-    render () {
+export default HomeView
 
-        return (
-            <h1>Welcome to the plot device.</h1>
-        );
-    }
-}
-
-
-module.exports = HomeView;

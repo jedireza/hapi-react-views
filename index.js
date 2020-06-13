@@ -2,9 +2,7 @@
 
 const Hoek = require('@hapi/hoek');
 const Path = require('path');
-const React = require('react');
 const ReactDOMServer = require('react-dom/server');
-
 
 const DEFAULTS = {
     doctype: '<!DOCTYPE html>',
@@ -30,7 +28,7 @@ const compile = function compile(template, compileOpts) {
         // support for es6 default export semantics
         View = View.default || View;
 
-        const ViewElement = React.createFactory(View);
+        const ViewElement = View;
 
         let output = renderOpts.doctype;
 
@@ -43,7 +41,7 @@ const compile = function compile(template, compileOpts) {
             // support for es6 default export semantics
             Layout = Layout.default || Layout;
 
-            const LayoutElement = React.createFactory(Layout);
+            const LayoutElement = Layout;
 
             const viewOutput = ReactDOMServer[renderOpts.renderMethod](ViewElement(context));
 

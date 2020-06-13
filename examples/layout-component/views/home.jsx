@@ -1,7 +1,7 @@
 'use strict';
 
-const React = require('react');
-const Layout = require('./layout.jsx');
+import React from 'react'
+import Layout from './layout';
 
 
 class HomeView extends React.Component {

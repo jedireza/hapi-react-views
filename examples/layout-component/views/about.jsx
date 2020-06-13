@@ -1,7 +1,7 @@
 'use strict';
 
-const React = require('react');
-const Layout = require('./layout.jsx');
+import React from 'react'
+import Layout from './layout';
 
 
 class AboutView extends React.Component {
@@ -16,4 +16,4 @@ class AboutView extends React.Component {
 }
 
 
-module.exports = AboutView;
+export default AboutView;
