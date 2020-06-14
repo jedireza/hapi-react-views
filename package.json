@@ -31,11 +31,13 @@
     "@hapi/hoek": "8.x.x",
     "babel-eslint": "^10.1.0",
     "eslint-config-defaults": "^9.0.0",
-    "eslint-plugin-react": "^7.20.0"
+    "eslint-plugin-react": "^7.20.0",
+    "react": "^16.13.1",
+    "react-dom": "16.13.1"
   },
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1 "
+    "react": "^16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",
