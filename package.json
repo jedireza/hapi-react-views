@@ -1,6 +1,6 @@
 {
   "name": "hapi-react-views",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "description": "A hapi view engine for React components.",
   "main": "index.js",
   "scripts": {
