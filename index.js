@@ -30,7 +30,7 @@ const compile = function compile(template, compileOpts) {
         // support for es6 default export semantics
         View = View.default || View;
 
-        const ViewElement = React.createFactory(View);
+        const createViewElement = (props = null, children = null) => React.createElement(View, props, children);
 
         let output = renderOpts.doctype;
 
@@ -43,14 +43,14 @@ const compile = function compile(template, compileOpts) {
             // support for es6 default export semantics
             Layout = Layout.default || Layout;
 
-            const LayoutElement = React.createFactory(Layout);
+            const createLayoutElement = (props = null, children = null) => React.createElement(Layout, props, children);
 
-            const viewOutput = ReactDOMServer[renderOpts.renderMethod](ViewElement(context));
+            const viewOutput = ReactDOMServer[renderOpts.renderMethod](createViewElement(context));
 
-            output += ReactDOMServer[renderOpts.layoutRenderMethod](LayoutElement(context, viewOutput));
+            output += ReactDOMServer[renderOpts.layoutRenderMethod](createLayoutElement(context, viewOutput));
         }
         else {
-            output += ReactDOMServer[renderOpts.renderMethod](ViewElement(context));
+            output += ReactDOMServer[renderOpts.renderMethod](createViewElement(context));
         }
 
         /*
