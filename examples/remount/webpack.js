@@ -8,6 +8,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
+    mode: 'development',
     output: {
         path: Path.resolve(__dirname),
         filename: './assets/client.js'
@@ -16,7 +17,7 @@ module.exports = {
         rules: [{
             test: /\.jsx$/,
             loader: 'babel-loader',
-            query: {
+            options: {
                 presets: ['@babel/preset-react', '@babel/preset-env']
             }
         }]

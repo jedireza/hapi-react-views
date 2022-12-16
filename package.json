@@ -31,8 +31,8 @@
     "@hapi/hoek": "9.x.x"
   },
   "peerDependencies": {
-    "react": "16.x.x",
-    "react-dom": "16.x.x "
+    "react": "16.x.x || 17.x.x || 18.x.x",
+    "react-dom": "16.x.x || 17.x.x || 18.x.x"
   },
   "devDependencies": {
     "@babel/cli": "7.x.x",
@@ -40,15 +40,16 @@
     "@babel/preset-env": "7.x.x",
     "@babel/preset-react": "7.x.x",
     "@babel/register": "7.x.x",
-    "@hapi/code": "8.x.x",
-    "@hapi/hapi": "19.x.x",
-    "@hapi/inert": "6.x.x",
-    "@hapi/lab": "22.x.x",
-    "@hapi/vision": "6.x.x",
-    "babel-loader": "8.x.x",
-    "react": "16.x.x",
-    "react-dom": "16.x.x",
-    "webpack": "4.x.x",
-    "webpack-cli": "3.x.x"
+    "@hapi/code": "9.x.x",
+    "@hapi/hapi": "21.x.x",
+    "@hapi/inert": "7.x.x",
+    "@hapi/lab": "25.x.x",
+    "@hapi/vision": "7.x.x",
+    "ajv": "8.11.2",
+    "babel-loader": "9.x.x",
+    "react": "18.x.x",
+    "react-dom": "18.x.x",
+    "webpack": "5.x.x",
+    "webpack-cli": "5.x.x"
   }
 }
